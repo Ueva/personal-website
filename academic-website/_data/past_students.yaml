@@ -1,0 +1,161 @@
+students:
+  - name: "Scarllette Ellis"
+    year: 2022
+    thesis: "Reinforcement Learning in the Board Game Pandemic"
+    degree: "MComp Computer Science, Year 3"
+    url: "https://people.bath.ac.uk/re412/"
+
+  - name: "Dougal Houston"
+    year: 2022
+    thesis: "Reinforcement Learning on Ludo"
+    degree: "BSc Computer Science"
+
+  - name: "Scarllette Ellis"
+    year: 2023
+    thesis: "Getting Prepared: Finding Subgoals by using the Graphical Structure of Environments to Maximise Empowerment"
+    degree: "MComp Computer Science, Year 4"
+    url: "https://people.bath.ac.uk/re412/"
+
+  - name: "Andrea Zerio"
+    year: 2023
+    thesis: "PPDT: Learning Input-Dependent Prompts To Improve Few-Shot Policy Generalisation"
+    degree: "MSc Artificial Intelligence"
+    url: "https://scholar.google.com/citations?user=SG9A29YAAAAJ"
+
+  - name: "Balamurali Chandran"
+    year: 2023
+    thesis: "Evaluation of Reinforcement Learning Algorithms for Job Scheduling in Dynamic Environments"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Tran 'Danny' Quang Duy"
+    year: 2023
+    thesis: "An Analytical Attempt of Reinforcement Learning Techniques in the Game 2048"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Geoffrey Nightingale"
+    year: 2023
+    thesis: "Role Specialisation in Heterogeneous Agents Using Reinforcement Learning"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Jorge Costa da Silva"
+    year: 2023
+    thesis: "Do reinforcement learning agents really learn?"
+    degree: "MSc Computer Science"
+
+  - name: "Joseph Ballan"
+    year: 2023
+    thesis: "Developing Dynamic and Hybrid Personalized Recommendation Systems Using Deep Reinforcement Learning"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Kavish Bolaky"
+    year: 2023
+    thesis: "Training a Competitive Racing Driver with Difficulty Adjustment using Deep Reinforcement Learning"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Soledad 'Sole' Traverso"
+    year: 2023
+    thesis: "Learning Skills from Time-Based Representations: A Comparison between Graph Laplacian Representations and Successor Representations in Environments with Directed Graphs"
+    degree: "MSc Artificial Intelligence"
+    url: "https://www.scienceofintelligence.de/people/sole-traverso/"
+
+  - name: "Andrej Lukic"
+    year: 2024
+    thesis: "Reducing Energy Consumption of an Embedded Forecasting System by Using Reinforcement Learning"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Henry Cunnison"
+    year: 2024
+    thesis: "Extending Generative Experience Replay in Online Reinforcement Learning"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Pedro Jardim"
+    year: 2024
+    thesis: "In-Depth Analysis of FeUdal Networks"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Arnau Ayerbe Garcia"
+    year: 2024
+    thesis: "Towards AGI, Preference Modelling and Alignment in LLMs: A Survey"
+    degree: "MComp Computer Science, Year 4"
+    url: "https://arnauayerbe.com"
+
+  - name: "Benedict Ellett"
+    year: 2024
+    thesis: "Use of Reinforcement Learning in Assembly Line Design"
+    degree: "BSc Computer Science"
+
+  - name: "Jamal Akhras"
+    year: 2024
+    thesis: "Using Proximal Policy Optimization with Adversarial Motion Priors to Aid Rehabilitation"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 3"
+
+  - name: "Nathan Petrou"
+    year: 2024
+    thesis: "Unveiling the Impact: Exploring Key Parameters of Domain Randomization for Reinforcement Learning Agents"
+    degree: "BSc Computer Science"
+
+  - name: "Yuxuan 'Tony' Zhang"
+    year: 2024
+    thesis: "Towards Better Multi-Agent Hierarchical Reinforcement Learning: A Comparative Study on 'Overcooked!'"
+    degree: "MComp Computer Science, Year 3"
+
+  - name: "Shivam Sethi"
+    year: 2024
+    thesis: "The Generalisability of Cooperative Multi-Agent Reinforcement Learning Algorithms in a Mixed Setting"
+    degree: "BSc Computer Science and Artificial Intelligence"
+    url: "https://shivsethi.com"
+
+  - name: "Cameron Archibold"
+    year: 2025
+    thesis: "Fully Closed-Loop Blood Glucose Control for Patients with Type 1 Diabetes using Deep Reinforcement Learning"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 4"
+
+  - name: "Farahmand Zeidaabadi Nezhad"
+    year: 2025
+    thesis: "Leveraging Pre-trained Vision-language Models to Train Generalisable Artificial Agents"
+    degree: "BSc Computer Science and Artificial Intelligence"
+
+  - name: "George Rawlinson"
+    year: 2025
+    thesis: "Exploring the Application and Benefits of Hierarchical Networks"
+    degree: "BSc Computer Science"
+
+  - name: "Harvey Ayling"
+    year: 2025
+    thesis: "Applying Graph-Based Reinforcement Learning to Continuous-State Environments"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 4"
+
+  - name: "Jamal Akhras"
+    year: 2025
+    thesis: "Reinforcement Learning with Adversarial Motion Priors for Surface EMG-Driven Prosthetic Hand Control"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 4"
+
+  - name: "Lara Sheard"
+    year: 2025
+    thesis: "Skill Discovery within Multi-Agent Reinforcement Learning (MARL)"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 3"
+
+  - name: "Yuxuan 'Tony' Zhang"
+    year: 2025
+    thesis: "Pre-Training Option Critic"
+    degree: "MComp Computer Science, Year 4"
+
+  - name: "Calum Ogilvy"
+    year: 2025
+    thesis: "The Imitation-Performance Paradox: Distilling Robust and Interpretable Policies from Deep Reinforcement Learning Agents"
+    degree: "MSc Computer Science"
+
+  - name: "Xiaotong Bai"
+    year: 2025
+    thesis: "Emergence of Grammatical Structures from Multi-Agent Interactions in Referential Games"
+    degree: "MSc Computer Science"
+
+  - name: "Ellie Smyth"
+    year: 2025
+    thesis: "Applications of Reinforcement Learning in Formula 1 Strategy"
+    degree: "MSc Data Science"
+
+  - name: "Akshaya Jeyaramsankar"
+    year: 2025
+    thesis: "Skill Discovery in Reinforcement Learning: Compartive Study of Option-Critic Methods"
+    degree: "MSc Data Science"

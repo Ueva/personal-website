@@ -1,0 +1,3 @@
+title: OfficeWorld
+url: https://github.com/Ueva/OfficeWorld
+description: A highly-customisable, scalable, procedurally generated "office building" gridworld environment for reinforcement learning agents. Built on top of my SimpleOptions framework.

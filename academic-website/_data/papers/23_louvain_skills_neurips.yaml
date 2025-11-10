@@ -1,0 +1,8 @@
+title: Creating Multi-Level Skill Hierarchies in Reinforcement Learning (NeurIPS 2023)
+date: 2023-09-23
+description: We propose a novel characterisation of a <strong>multi-level</strong> skill hierarchy for reinforcement learning. Our approach uses modularity maximisation to expose the structure of the agent's interaction with its environment at multiple levels of abstraction.
+paper: https://proceedings.neurips.cc/paper_files/paper/2023/file/97b73904e88cc1dc0a3485595eda3753-Paper-Conference.pdf
+supplement: https://proceedings.neurips.cc/paper_files/paper/2023/file/97b73904e88cc1dc0a3485595eda3753-Supplemental-Conference.pdf
+bibtex: https://proceedings.neurips.cc/paper_files/paper/19756-/bibtex
+code: https://github.com/bath-reinforcement-learning-lab/Louvain-Skills-NeurIPS-2023/tree/JMLR-2024
+reference: Evans, J.B. and Şimşek, Ö. (2023). "Creating Multi-Level Skill Hierarchies in Reinforcement Learning". Advances in Neural Information Processing Systems, 36, pp.48472-48484.

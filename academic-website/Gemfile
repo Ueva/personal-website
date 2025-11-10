@@ -9,9 +9,6 @@ source "https://rubygems.org"
 
 gem "jekyll", "~> 4.3.4"
 
-# Jekyll Theme
-gem "minima", "~> 2.5.2"
-
 # Jekyll Plugins
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"

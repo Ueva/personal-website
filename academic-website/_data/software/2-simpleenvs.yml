@@ -1,0 +1,3 @@
+title: SimpleEnvs
+url: https://github.com/Ueva/BaRL_Envs
+description: Implementations of various sequential decision problems, built on top of my SimpleOptions framework. The API used in this package is similar to that used by OpenAI Gym.

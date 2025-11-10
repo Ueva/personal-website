@@ -3,17 +3,41 @@ email: jbe25@bath.ac.uk
 description: Personal website of Joshua B. Evans, lecturer in artificial intelligence at the University of Bath.
 baseurl: ""
 url: "https://people.bath.ac.uk/jbe25"
-twitter_username: TheJEvns
-github_username:  Ueva
 
-# Build settings
-theme: minima
+# No theme (use own layouts and styles).
+#theme: none
+
+# Plugins list.
 plugins:
   - jekyll-feed
   - jekyll-paginate-v2
   - jekyll-scholar
   - jekyll-seo-tag
   - jekyll-sitemap
+
+markdown: kramdown
+highlighter: rouge
+
+# Build settings.
+sass:
+  style: compressed
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values:
+      layout: post
+  - scope: { path: "", type: "pages" }
+    values:
+      layout: page
+
+# Custom variables.
+author:
+  name: Joshua B. Evans
+  affiliation: University of Bath
+  email: jbe25@bath.ac.uk
+socials:
+  twitter: TheJEvns
+  github: Ueva
 
 # Exclude from processing.
 # The following items will not be processed, by default.

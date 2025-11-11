@@ -1,8 +1,7 @@
 title: Joshua B. Evans
 email: jbe25@bath.ac.uk
-description: Personal website of Joshua B. Evans, lecturer in artificial intelligence at the University of Bath.
-baseurl: ""
-url: "https://people.bath.ac.uk/jbe25"
+description: Personal website of Joshua B. Evans, lecturer in computer science and artificial intelligence at the University of Bath.
+image: /assets/images/profile_pic.png
 
 # No theme (use own layouts and styles).
 #theme: none
@@ -40,16 +39,9 @@ socials:
   github: Ueva
 
 # Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
+exclude:
+  - serve.ps1
+  - serve.ps1
 #   - gemfiles/
 #   - Gemfile
 #   - Gemfile.lock

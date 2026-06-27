@@ -159,3 +159,43 @@ students:
     year: 2025
     thesis: "Skill Discovery in Reinforcement Learning: Compartive Study of Option-Critic Methods"
     degree: "MSc Data Science"
+
+  - name: "Anoushka Vallabh"
+    year: 2026
+    thesis: "A Parametric Analysis of Classical and Goal-directed Empowerment Within Reinforcement Learning"
+    degree: "BSc Computer Science"
+
+  - name: "Alejandro Herrera"
+    year: 2026
+    thesis: "Evaluating Zero-Shot Representation Learning Methods Under a Common Ground-Truth Standard"
+    degree: "MComp Computer Science, Year 3"
+
+  - name: "Ben Rall"
+    year: 2026
+    thesis: "Learning the Minimum Action Distance in Pixel-Based Environments"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 4"
+
+  - name: "Hanying Hong"
+    year: 2026
+    thesis: "Skill Visualisation using UMAP and HDBSCAN in Flat Deep Reinforcement Learning Agents"
+    degree: "MComp Computer Science and Artificial Intelligence, Year 3"
+
+  - name: "Sade Inniss"
+    year: 2026
+    thesis: "Measuring the Exploration Capacity of Skillsets"
+    degree: "MComp Computer Science and Mathematics, Year 3"
+
+  - name: "Rhian Kansara"
+    year: 2026
+    thesis: "Characterizing Gradient Geometry and Credit Assignment in PPO and Rainbow DQN"
+    degree: "BSc Computer Science and Artificial Intelligence"
+
+  - name: "Talia Riches"
+    year: 2026
+    thesis: "Safe Reinforcement Learning for Carbohydrate-Based Prevention of Hypoglycaemia"
+    degree: "BSc Computer Science and Mathematics"
+
+  - name: "Viktoriia Rybalka"
+    year: 2026
+    thesis: "Graph-Based Skill Discovery and Planning for Continuous-Control Robotics"
+    degree: "BSc Computer Science and Artificial Intelligence"

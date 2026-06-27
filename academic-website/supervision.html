@@ -1,0 +1,54 @@
+---
+layout: page
+title: Supervision
+nav_order: 4
+nav_title: Supervision
+---
+
+<p>
+    Here, you can find a list of undergraduate and master's students I have supervised in the past, along with their
+    dissertation topics.
+</p>
+
+<p class="callout info">
+    If you are a student interested in undertaking a reinforcement learning project, please get in touch!
+</p>
+
+{% comment %}
+Load students from `_data/past_students.yml` → students: [ ... ]
+Guard against nils; group by year (descending); sort students by name within each year.
+{% endcomment %}
+{% assign ds = site.data.past_students %}
+{% assign items = ds.students | default: '' | split: '' %}
+{% if ds and ds.students %}
+{% assign items = ds.students %}
+{% endif %}
+
+{% assign items = items | where_exp: 's', 's and s.year and s.name' %}
+
+{%- comment -%}
+Group by year, then sort groups by year name descending.
+{%- endcomment -%}
+{% assign grouped = items | group_by: 'year' %}
+{% assign grouped = grouped | sort: 'name' | reverse %}
+
+{% for year in grouped %}
+{% assign yr = year.name | plus: 0 %}
+{% assign prev = yr | minus: 1 %}
+<section class="card">
+    <h2 class="mt-0">{{ prev }}&ndash;{{ yr }}</h2>
+    {% assign byname = year.items | sort: 'name' %}
+    {% for s in byname %}
+    <p class="student-entry">
+        {% if s.url %}
+        <strong><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a></strong>
+        {% else %}
+        <strong>{{ s.name }}</strong>
+        {% endif %}
+        <span class="small">{{ s.degree }}</span>
+        <br>
+        <em>{{ s.thesis }}</em>
+    </p>
+    {% endfor %}
+</section>
+{% endfor %}

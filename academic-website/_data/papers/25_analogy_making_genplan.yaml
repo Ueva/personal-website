@@ -1,5 +1,5 @@
 title: Structural Analogies as Posterior Transfer in Continual Reinforcement Learning (GenPlan 2026)
 date: 2026-05-30
 description: We propose a novel method for transfer in continual reinforcement learning via graph matching.
-paper: https://openreview.net/pdf?id=ahbc5TnonS
+workshop: https://openreview.net/pdf?id=ahbc5TnonS
 reference: 'Traverso, S., Evans, J.B., Sprekeler, H., and Toussaint, M. (2026). "Structural analogies as posterior transfer in continual reinforcement learning: When does analogy help?". 9th Workshop on Generalization in Planning @ ICAPS.'

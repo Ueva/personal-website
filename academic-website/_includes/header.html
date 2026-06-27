@@ -1,0 +1,86 @@
+<header class="site-header">
+    <div class="container nav-wrap">
+        <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+
+        <div class="nav-group">
+            <!-- Mobile menu button -->
+            <button class="nav-toggle" type="button" aria-label="Open site menu" aria-expanded="false"
+                aria-controls="site-nav">
+                Menu
+            </button>
+
+            <!-- Primary navigation -->
+            <nav id="site-nav" class="site-nav" aria-label="Primary">
+                <ul>
+                    {% assign nav_pages = site.pages | where_exp: 'p', 'p.nav_order' | sort: 'nav_order' %}
+                    {% for p in nav_pages %}
+                    <li>
+                        <a href="{{ p.url | relative_url }}" {% if p.url==page.url %}aria-current="page" {% endif %}>
+                            {{ p.nav_title | default: p.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="button" type="button" aria-label="Toggle color theme"
+            aria-live="polite">Auto</button>
+    </div>
+</header>
+
+<!-- Minimal JS to toggle the mobile overlay menu -->
+<script>
+    (function () {
+        const toggle = document.querySelector('.nav-toggle');
+        const nav = document.getElementById('site-nav');
+        const header = document.querySelector('.site-header');
+        if (!toggle || !nav || !header) return;
+
+        function setOverlayTop() {
+            const h = header.getBoundingClientRect().height;
+            document.documentElement.style.setProperty('--overlay-top', h + 'px');
+        }
+
+        function openNav() {
+            setOverlayTop();
+            nav.classList.add('open');
+            toggle.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('nav-lock');
+            window.addEventListener('resize', setOverlayTop, { passive: true });
+        }
+
+        function closeNav() {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('nav-lock');
+            window.removeEventListener('resize', setOverlayTop);
+        }
+
+        // Toggle on button click
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = nav.classList.contains('open');
+            isOpen ? closeNav() : openNav();
+        });
+
+        // Close on link click (navigate away)
+        nav.addEventListener('click', (e) => {
+            const a = e.target.closest('a');
+            if (a) closeNav();
+        });
+
+        // Close when clicking backdrop (anywhere inside nav but outside the UL)
+        nav.addEventListener('click', (e) => {
+            const ul = nav.querySelector('ul');
+            if (ul && !ul.contains(e.target)) closeNav();
+        });
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeNav();
+        });
+    })();
+</script>

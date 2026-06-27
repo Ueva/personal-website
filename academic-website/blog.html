@@ -1,0 +1,53 @@
+---
+layout: page
+title: Blog
+nav_order: 6
+nav_title: Blog
+---
+
+<section class="page-content">
+    <p class="lede">
+        Below, you can find a list of my blog posts.
+        All opinions expressed here are my own and do not represent those of my colleagues or the University.
+    </p>
+</section>
+
+<section class="page-content">
+    {% if site.posts and site.posts != empty %}
+
+    {% assign groups = site.posts | group_by_exp: 'p', "p.date | date: '%Y'" %}
+
+    {% for year in groups %}
+    <div class="card">
+        <h2 class="mt-0">{{ year.name }}</h2>
+
+        {% for post in year.items %}
+        <article class="card" style="margin-bottom: var(--space-4);">
+            <header>
+                <h3 class="mt-0" style="margin-bottom:.3rem;">
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </h3>
+                <p class="small" style="margin-top:0;">
+                    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
+                    {% if post.author or site.author.name %} · {{ post.author | default: site.author.name }}{% endif %}
+                </p>
+            </header>
+
+            {% assign blurb = post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 260
+            %}
+            <p>{{ blurb }}</p>
+
+            <div class="card-actions">
+                <a class="button primary" href="{{ post.url | relative_url }}">Read Post »</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <div class="card">
+        <h2 class="mt-0">No Blog Posts (Yet!)</h2>
+    </div>
+    {% endif %}
+</section>

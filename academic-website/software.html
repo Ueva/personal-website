@@ -1,0 +1,66 @@
+---
+layout: page
+title: Software
+nav_order: 5
+nav_title: Software
+---
+
+<section class="page-content">
+    <p class="lede">
+        Below is a selection of software and libraries produced as part of my research.
+        For questions or suggestions, please feel free to open issues or discussion threads
+        on the respective GitHub repositories.
+    </p>
+</section>
+
+<section class="page-content">
+    {% assign raw = site.data.software %}
+
+    {% if raw == nil %}
+    <div class="card">
+        <h2 class="mt-0">No software entries found</h2>
+        <p class="small">Add entries under <code>_data/software.yml</code> or as multiple files under
+            <code>_data/software/</code>.
+        </p>
+    </div>
+    {% else %}
+
+    {%- comment -%}
+    Normalise to a flat array: raw may be an array, or a hash from multiple files
+    {%- endcomment -%}
+    {% assign items = '' | split: '' %}
+    {% if raw.first and raw.first[1] %}
+    {% for pair in raw %}{% assign items = items | push: pair[1] %}{% endfor %}
+    {% else %}
+    {% assign items = raw %}
+    {% endif %}
+
+    {% if items == empty %}
+    <div class="card">
+        <h2 class="mt-0">No software entries found</h2>
+        <p class="small">Parsed <code>_data/software*</code> but found no items.</p>
+    </div>
+    {% else %}
+
+    {% for project in items %}
+    {% if project.title %}
+    <article class="card" style="margin-bottom: var(--space-4);">
+        <header>
+            <h3 class="mt-0" style="margin-bottom:.3rem;">{{ project.title }}</h3>
+        </header>
+
+        {% if project.description %}
+        <p>{{ project.description }}</p>
+        {% endif %}
+
+        <div class="card-actions">
+            {% if project.url %}
+            <a class="button primary" href="{{ project.url }}" target="_blank" rel="noopener">GitHub »</a>
+            {% endif %}
+        </div>
+    </article>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+</section>

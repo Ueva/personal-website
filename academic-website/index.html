@@ -1,0 +1,149 @@
+---
+layout: default
+title: Home
+nav_order: 1
+nav_title: Home
+---
+
+<div class="card text-center hero-intro">
+    <p class="kicker">Artificial Intelligence · Reinforcement Learning · Skill Discovery</p>
+    <h1 class="mt-0">Welcome to Joshua B. Evans' Homepage</h1>
+    <p class="mt-0 small">Department of Computer Science, University of Bath</p>
+</div>
+
+<section class="page-content">
+    <div class="intro">
+
+        <p class="lede">
+            I'm a Lecturer at the
+            <a href="https://www.bath.ac.uk/" target="_blank" rel="noopener">University of Bath</a>,
+            where I work with the <a href="https://bathrllab.github.io" target="_blank" rel="noopener">Bath
+                Reinforcement Learning Laboratory</a>,
+            currently led by
+            <a href="https://researchportal.bath.ac.uk/en/persons/özgür-şimşek" target="_blank" rel="noopener">Professor
+                Özgür Şimşek</a>.
+
+            This website contains links to my research, teaching, news, and a personal blog. Whatever you came here
+            for, I hope that you find this website useful!
+        </p>
+
+
+        <picture class="pull-figure">
+            <img src="{{ '/assets/images/profile_pic.png' | relative_url }}" alt="Profile picture of Joshua B. Evans"
+                loading="lazy" decoding="async">
+        </picture>
+
+
+        <h2>Research</h2>
+
+        <p class="mb-0">
+            My research focuses on developing AI agents capable of incrementally learning complex behaviours, or
+            <strong>skills</strong>, through interaction with their environments. Most of my work is done within the
+            framework
+            of <strong>reinforcement learning</strong>.
+        </p>
+
+        <p> My wider research interests include:</p>
+        <ul class="mt-0" style="padding-left: 50px;">
+            <li>Hierarchical Reinforcement Learning</li>
+            <li>Graph-Based Skill Discovery Methods</li>
+            <li>Human-Inspired Skill Discovery Methods</li>
+            <li>World Models and Representation Learning</li>
+            <li>Intrinsically-Motivated Reinforcement Learning</li>
+        </ul>
+
+
+        <h2>Teaching</h2>
+
+        <p>
+            I'm the unit convenor for the University's on-campus reinforcement learning units at undergraduate and
+            master's level. I am also the author of the online version of these units for the University's
+            <a href="https://online.bath.ac.uk/online-courses/msc-artificial-intelligence" target="_blank"
+                rel="noopener">online MSc AI programme</a>.
+        </p>
+        <ul class="mt-0" style="padding-left: 50px;">
+            <li>Reinforcement Learning (Undergraduate:
+                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM32032.html" target="_blank">CM32032</a>,
+                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM52048.html" target="_blank">CM52048</a>)
+            </li>
+            <li>Reinforcement Learning 1 (Postgraduate:
+                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM52074.html" target="_blank">CM52074</a>)
+            </li>
+            <li>Reinforcement Learning 2 (Postgraduate:
+                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM52075.html" target="_blank">CM50275</a>)
+            </li>
+        </ul>
+        <p>
+            I also supervise BSc, MComp, and MSc dissertation projects. You can see a list of students and projects I
+            have supervised in the past <a href="{{ '/supervision.html' | relative_url }}">here</a>.
+            If you are a student interested in undertaking a reinforcement learning project, please get in touch!
+        </p>
+
+        <!-- Ensure the float is cleared before the next section -->
+        <div style="clear: both"></div>
+    </div>
+</section>
+
+<br>
+
+<!-- Use the dedicated features grid that is 3-up on large, 1-up otherwise -->
+<div class="features-3">
+
+    <div class="card stretch">
+        <h3 class="mt-0">Featured Paper</h3>
+        <p>Creating Multi-Level Skill Hierarchies in Reinforcement Learning</p>
+        <p class="small">
+            We propose a graph-based characterisation of a <strong>multi-level</strong> skill hierarchy for
+            reinforcement learning.
+        </p>
+        <div class="card-actions">
+            <a class="button primary"
+                href="https://proceedings.neurips.cc/paper_files/paper/2023/file/97b73904e88cc1dc0a3485595eda3753-Paper-Conference.pdf"
+                target="_blank" rel="noopener">Read Paper »</a>
+        </div>
+    </div>
+
+    <div class="card stretch">
+        <h3 class="mt-0">Recent News</h3>
+
+        {%- assign latest = nil -%}
+        {%- assign latest_date = nil -%}
+
+        {%- comment -%}
+        Case 1: `_data/news/*.yml` produces a hash where each `pair` is [key, value].
+        `pair[1]` is the YAML object (expects keys: date, text).
+        We scan for the max `date` without relying on `map`/`sort`.
+        {%- endcomment -%}
+        {%- for pair in site.data.news -%}
+        {%- assign n = pair[1] -%}
+        {%- if n and n.date and n.text -%}
+        {%- if latest_date == nil or n.date > latest_date -%}
+        {%- assign latest = n -%}
+        {%- assign latest_date = n.date -%}
+        {%- endif -%}
+        {%- endif -%}
+        {%- endfor -%}
+
+        {%- if latest -%}
+        <p>{{ latest.text }}</p>
+        <p class="small">{{ latest.date | date: '%B %Y' }}</p>
+        {%- else -%}
+        <p>No news items yet.</p>
+        {%- endif -%}
+
+        <div class="card-actions">
+            <a class="button primary" href="{{ '/news.html' | relative_url }}">All News »</a>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <h3 class="mt-0">Quote of the Moment</h3>
+        <p id="quote-text"></p>
+        <div class="fill"></div>
+        <p class="small" id="quote-author"></p>
+        <script type="application/json" id="quotes-data">{{ site.data.quotes | jsonify }}</script>
+    </div>
+
+</div>
+</section>

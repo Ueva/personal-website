@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+    {% include head.html %}
+</head>
+
+<body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    {% include header.html %}
+    <main id="content" class="container" style="flex:1">
+        {{ content }}
+    </main>
+    {% include footer.html %}
+    <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+</body>
+
+</html>

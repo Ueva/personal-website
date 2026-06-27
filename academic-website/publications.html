@@ -1,0 +1,208 @@
+---
+layout: page
+title: Publications
+nav_order: 3
+nav_title: Publications
+---
+
+<section class="page-content">
+    <p class="lede">
+        Below is a list of my publications, with links to conference/journal papers, workshop papers, preprints,
+        supplements, and code where available.
+        Please feel free to get in touch if you have any questions about my research.
+    </p>
+</section>
+
+<section class="page-content">
+    {% assign raw = site.data.papers %}
+
+    {% if raw == nil %}
+    <div class="card">
+        <h2 class="mt-0">No publications found</h2>
+        <p class="small">Add entries under <code>_data/papers.yml</code> or as multiple files under
+            <code>_data/papers/</code>.
+        </p>
+    </div>
+    {% else %}
+
+    {%- comment -%}
+    Normalise to a flat array "flat":
+    - If raw is {papers:[...]}, use that array
+    - If raw is already an array, use it directly
+    - If raw is a hash from multiple files, push each value (pair[1])
+    {%- endcomment -%}
+    {% assign flat = '' | split: '' %}
+
+    {% if raw.papers %}
+    {% assign flat = raw.papers %}
+    {% elsif raw.first and raw.first[1] %}
+    {% for pair in raw %}
+    {% assign flat = flat | push: pair[1] %}
+    {% endfor %}
+    {% else %}
+    {% assign flat = raw %}
+    {% endif %}
+
+    {%- comment -%} Sort by ISO date (YYYY-MM-DD) descending {%- endcomment -%}
+    {% assign ordered = flat | sort: 'date' | reverse %}
+
+    {% if ordered == empty %}
+    <div class="card">
+        <h2 class="mt-0">No publications found</h2>
+        <p class="small">Parsed <code>_data/papers*</code> but found no items.</p>
+    </div>
+    {% else %}
+
+    {%- comment -%} ========= CONFERENCE / JOURNAL PAPERS ========= {%- endcomment -%}
+    <div class="card">
+        <h2 class="mt-0">Conference and Journal Papers</h2>
+
+        {% assign has_published = false %}
+        {% for paper in ordered %}
+        {% if paper.title and paper.paper and paper.workshop == nil %}
+        {% assign has_published = true %}
+        <article class="card" style="margin-bottom: var(--space-4);">
+            <header>
+                <h3 class="mt-0" style="margin-bottom:.3rem;">{{ paper.title }}</h3>
+                <p class="small" style="margin-top:0;">
+                    {% if paper.date %}
+                    <time datetime="{{ paper.date | date_to_xmlschema }}">{{ paper.date | date: "%-d %B %Y" }}</time>
+                    {% if paper.reference %} · {{ paper.reference }}{% endif %}
+                    {% elsif paper.reference %}
+                    {{ paper.reference }}
+                    {% endif %}
+                </p>
+            </header>
+
+            {% if paper.description %}
+            <p>{{ paper.description }}</p>
+            {% endif %}
+
+            <div class="card-actions">
+                {% if paper.paper %}
+                <a class="button primary" href="{{ paper.paper }}" target="_blank" rel="noopener">Paper »</a>
+                {% endif %}
+                {% if paper.supplement %}
+                <a class="button" href="{{ paper.supplement }}" target="_blank" rel="noopener">Appendices »</a>
+                {% endif %}
+                {% if paper.preprint %}
+                <a class="button" href="{{ paper.preprint }}" target="_blank" rel="noopener">Preprint »</a>
+                {% endif %}
+                {% if paper.code %}
+                <a class="button" href="{{ paper.code }}" target="_blank" rel="noopener">Code »</a>
+                {% endif %}
+                {% if paper.bibtex %}
+                <a class="button" href="{{ paper.bibtex }}" target="_blank" rel="noopener">BibTeX »</a>
+                {% endif %}
+            </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+
+        {% unless has_published %}
+        <p class="small">No conference or journal papers listed yet.</p>
+        {% endunless %}
+    </div>
+
+    {%- comment -%} ========= WORKSHOP PAPERS ========= {%- endcomment -%}
+    <div class="card">
+        <h2 class="mt-0">Workshop Papers</h2>
+
+        {% assign has_workshops = false %}
+        {% for paper in ordered %}
+        {% if paper.title and paper.workshop %}
+        {% assign has_workshops = true %}
+        <article class="card" style="margin-bottom: var(--space-4);">
+            <header>
+                <h3 class="mt-0" style="margin-bottom:.3rem;">{{ paper.title }}</h3>
+                <p class="small" style="margin-top:0;">
+                    {% if paper.date %}
+                    <time datetime="{{ paper.date | date_to_xmlschema }}">{{ paper.date | date: "%-d %B %Y" }}</time>
+                    {% if paper.reference %} · {{ paper.reference }}{% endif %}
+                    {% elsif paper.reference %}
+                    {{ paper.reference }}
+                    {% endif %}
+                </p>
+            </header>
+
+            {% if paper.description %}
+            <p>{{ paper.description }}</p>
+            {% endif %}
+
+            <div class="card-actions">
+                {% if paper.workshop %}
+                <a class="button primary" href="{{ paper.workshop }}" target="_blank" rel="noopener">Workshop »</a>
+                {% endif %}
+                {% if paper.supplement %}
+                <a class="button" href="{{ paper.supplement }}" target="_blank" rel="noopener">Appendices »</a>
+                {% endif %}
+                {% if paper.preprint %}
+                <a class="button" href="{{ paper.preprint }}" target="_blank" rel="noopener">Preprint »</a>
+                {% endif %}
+                {% if paper.code %}
+                <a class="button" href="{{ paper.code }}" target="_blank" rel="noopener">Code »</a>
+                {% endif %}
+                {% if paper.bibtex %}
+                <a class="button" href="{{ paper.bibtex }}" target="_blank" rel="noopener">BibTeX »</a>
+                {% endif %}
+            </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+
+        {% unless has_workshops %}
+        <p class="small">No workshop papers listed yet.</p>
+        {% endunless %}
+    </div>
+
+    {%- comment -%} ========= PREPRINTS ========= {%- endcomment -%}
+    <div class="card">
+        <h2 class="mt-0">Preprints</h2>
+
+        {% assign has_preprints = false %}
+        {% for paper in ordered %}
+        {% if paper.title and paper.preprint and paper.paper == nil and paper.workshop == nil %}
+        {% assign has_preprints = true %}
+        <article class="card" style="margin-bottom: var(--space-4);">
+            <header>
+                <h3 class="mt-0" style="margin-bottom:.3rem;">{{ paper.title }}</h3>
+                <p class="small" style="margin-top:0;">
+                    {% if paper.date %}
+                    <time datetime="{{ paper.date | date_to_xmlschema }}">{{ paper.date | date: "%-d %B %Y" }}</time>
+                    {% if paper.reference %} · {{ paper.reference }}{% endif %}
+                    {% elsif paper.reference %}
+                    {{ paper.reference }}
+                    {% endif %}
+                </p>
+            </header>
+
+            {% if paper.description %}
+            <p>{{ paper.description }}</p>
+            {% endif %}
+
+            <div class="card-actions">
+                {% if paper.preprint %}
+                <a class="button primary" href="{{ paper.preprint }}" target="_blank" rel="noopener">Preprint »</a>
+                {% endif %}
+                {% if paper.supplement %}
+                <a class="button" href="{{ paper.supplement }}" target="_blank" rel="noopener">Appendices »</a>
+                {% endif %}
+                {% if paper.code %}
+                <a class="button" href="{{ paper.code }}" target="_blank" rel="noopener">Code »</a>
+                {% endif %}
+                {% if paper.bibtex %}
+                <a class="button" href="{{ paper.bibtex }}" target="_blank" rel="noopener">BibTeX »</a>
+                {% endif %}
+            </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+
+        {% unless has_preprints %}
+        <p class="small">No papers currently available only as preprints.</p>
+        {% endunless %}
+    </div>
+
+    {% endif %}
+    {% endif %}
+</section>

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Theme toggle (auto → light → dark)
+  // Theme toggle (auto -> light -> dark)
   const THEME_KEY = 'theme'; // values: 'auto' | 'light' | 'dark'
   const root = document.documentElement;
   const btn = document.getElementById('theme-toggle');
@@ -46,24 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode = localStorage.getItem(THEME_KEY) || 'auto';
     if (mode === 'auto') applyTheme('auto');
   });
-
-  // Random quote (if present on page)
-  const quotesEl = document.getElementById('quotes-data');
-  if (quotesEl) {
-    try {
-      const quotes = JSON.parse(quotesEl.textContent);
-      if (Array.isArray(quotes) && quotes.length) {
-        const q = quotes[Math.floor(Math.random() * quotes.length)];
-        const qt = document.getElementById('quote-text');
-        const qa = document.getElementById('quote-author');
-        if (qt && qa && q) {
-          qt.textContent = `“${q.text}”`;
-          qa.textContent = `– ${q.author}`;
-        }
-      }
-    } catch (e) {
-      console.warn('Unable to parse quotes data', e);
-    }
-  }
 
 });

@@ -137,12 +137,14 @@ nav_title: Home
     </div>
 
 
-    <div class="card">
+    <div class="card quote-card">
         <h3 class="mt-0">Quote of the Moment</h3>
         <p id="quote-text"></p>
         <div class="fill"></div>
         <p class="small" id="quote-author"></p>
+        <div class="quote-progress" aria-hidden="true"><span></span></div>
         <script type="application/json" id="quotes-data">{{ site.data.quotes | jsonify }}</script>
+        <script src="{{ '/assets/js/quote-rotator.js' | relative_url }}" defer></script>
     </div>
 
 </div>

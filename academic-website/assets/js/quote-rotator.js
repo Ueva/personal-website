@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const quoteText = document.getElementById('quote-text');
   const quoteAuthor = document.getElementById('quote-author');
   const progress = document.querySelector('.quote-progress');
-  const quoteIntervalMs = 20000;
+  const quoteIntervalMs = 15000;
 
   if (!quotesEl || !quoteText || !quoteAuthor) return;
 

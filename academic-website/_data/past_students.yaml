@@ -199,3 +199,33 @@ students:
     year: 2026
     thesis: "Graph-Based Skill Discovery and Planning for Continuous-Control Robotics"
     degree: "BSc Computer Science and Artificial Intelligence"
+
+  - name: "Zahin Hussain"
+    year: 2026
+    thesis: "Surveying Reinforcement Learning Techniques In Real-World Applications"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Shilu Shrestha"
+    year: 2026
+    thesis: "Scaling Limits in Biological Hierarchical Reinforcement Learning Models of Addiction"
+    degree: "MSc Artificial Intelligence"
+
+  - name: "Luke Crawford"
+    year: 2026
+    thesis: "Investigating Stability in High-Dimensional Feudal Control"
+    degree: "MSc in Artificial Intelligence"
+
+  - name: "Richard Fisher"
+    year: 2026
+    thesis: "Selective Repair of Multi-Level Skill Hierarchies in Non-Stationary Reinforcement Learning"
+    degree: "MSc Advanced Machine Learning"
+
+  - name: "Louie Trezise"
+    year: 2026
+    thesis: "Discovering Multi-Level Skill Hierarchies for Reinforcement Learning via Contrastive Latent Clustering"
+    degree: "MSc Advanced Machine Learning"
+
+  - name: "Hulusi Erin Ozyahyalar"
+    year: 2026
+    thesis: "Salient Event Discovery in Hierarchical Reinforcement Learning"
+    degree: "MSc Advanced Machine Learning"

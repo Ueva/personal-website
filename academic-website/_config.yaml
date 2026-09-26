@@ -1,6 +1,6 @@
 title: Joshua B. Evans
 email: jbe25@bath.ac.uk
-description: Personal website of Joshua B. Evans, lecturer in computer science and artificial intelligence at the University of Bath.
+description: Joshua B. Evans is a lecturer at the University of Bath, where his research focuses on hierarchical reinforcement learning, skill discovery, and other aspects of artificial intelligence and machine learning.
 image: /assets/images/profile_pic.png
 
 # No theme (use own layouts and styles).
@@ -12,6 +12,7 @@ plugins:
   - jekyll-paginate-v2
   - jekyll-scholar
   - jekyll-seo-tag
+  - jekyll-last-modified-at
   - jekyll-sitemap
 
 markdown: kramdown

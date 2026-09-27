@@ -1,0 +1,28 @@
+---
+layout: null
+sitemap: false
+---
+# Joshua B. Evans
+
+> Personal academic website of Joshua B. Evans, Lecturer in Computer Science at the University of Bath. Research focuses on reinforcement learning, particularly hierarchical reinforcement learning, skill discovery, graph-based methods, representation learning, and intrinsic motivation.
+
+This site contains information about Joshua B. Evans' research, publications, teaching, student supervision, research software, and academic activities. For publication metadata and research outputs, prefer the Publications page; for dated professional and research updates, use the News page.
+
+## Academic Profile and Research
+
+- [Homepage](https://ueva.dev/): Overview of Joshua B. Evans' academic role, research interests, reinforcement learning teaching, student supervision, featured research, and recent news.
+- [Publications](https://ueva.dev/publications.html): Publication list with bibliographic information, summaries, and links to papers, preprints, supplementary material, and source code where available.
+- [News](https://ueva.dev/news.html): Chronological record of research publications, conference presentations, teaching developments, academic appointments, awards, and other professional activities.
+- [Supervision](https://ueva.dev/supervision.html): Undergraduate and master's dissertation projects supervised by Joshua B. Evans, including project titles and student programmes.
+- [Software](https://ueva.dev/software.html): Research software for reinforcement learning, including SimpleOptions, SimpleEnvs, and OfficeWorld, with links to their source repositories.
+
+## Contact and Profiles
+
+- [Contact](https://ueva.dev/contact.html): Academic and professional contact details, University of Bath affiliation and office location, and links to external academic and professional profiles.
+
+## Optional
+
+- [Blog](https://ueva.dev/blog.html): Personal blog area. No blog posts are currently published.
+- [University of Bath Research Profile](https://researchportal.bath.ac.uk/en/persons/joshua-evans/): Institutional research profile at the University of Bath.
+- [ORCID](https://orcid.org/0009-0003-8593-600X): ORCID researcher identifier and publication profile.
+- [GitHub](https://github.com/Ueva): Source-code repositories and software projects maintained by Joshua B. Evans.

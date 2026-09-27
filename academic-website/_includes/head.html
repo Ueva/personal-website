@@ -3,11 +3,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 
-{%- assign seo_title = page.seo_title | default: page.title | default: site.title -%}
-{%- if page.url == '/' -%}
-{%- assign full_title = seo_title -%}
+{%- if page.seo_title -%}
+{%- assign full_title = page.seo_title -%}
+{%- elsif page.title -%}
+{%- capture full_title -%}{{ page.title }} · {{ site.title }}{%- endcapture -%}
 {%- else -%}
-{%- capture full_title -%}{{ seo_title }} · {{ site.title }}{%- endcapture -%}
+{%- assign full_title = site.title -%}
 {%- endif -%}
 <title>{{ full_title | escape }}</title>
 

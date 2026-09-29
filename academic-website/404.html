@@ -1,11 +1,26 @@
 ---
 permalink: /404.html
-layout: page
-title: Not all those who wander are lost...
+layout: default
+title: "404 — Page not found"
 nav_exclude: true
 noindex: true
 sitemap: false
 ---
-<h2>...but it seems you are!</h2>
+<article class="not-found" aria-labelledby="not-found-title">
+    <header>
+        <p class="not-found-code" aria-hidden="true">404</p>
+        <h1 id="not-found-title">Page not found</h1>
+    </header>
 
-<p>The page you were looking for could not be found.</p>
+    <div class="not-found-message">
+        <p class="not-found-quote">Not all those who wander are lost…</p>
+        <p class="not-found-punchline">…but it seems you are!</p>
+    </div>
+
+    <p class="not-found-description">The page you’re looking for may have moved, or the link may be incorrect.
+        Let’s get you back to familiar ground.</p>
+
+    <nav class="not-found-actions" aria-label="Find your way back">
+        <a class="button primary" href="{{ '/' | relative_url }}">Back to Home</a>
+    </nav>
+</article>

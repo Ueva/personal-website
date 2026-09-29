@@ -220,6 +220,41 @@ img, video { max-width: 100%; height: auto; }
 .page, .post { max-width: var(--read-w); margin-inline: auto; }
 .page-content, .post-content { max-width: var(--read-w); margin-inline: auto; }
 
+/* Custom 404 page */
+.not-found {
+  max-width: 44rem;
+  margin: clamp(2rem, 6vw, 5rem) auto;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: radial-gradient(ellipse at top, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%);
+}
+.not-found-code {
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(5rem, 16vw, 9rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.not-found h1 {
+  margin: 1rem 0 2rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+}
+.not-found-message {
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--border);
+}
+.not-found-quote {
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-style: italic;
+}
+.not-found-punchline { margin: .5rem 0 0; color: var(--muted); }
+.not-found-description { max-width: 40ch; margin: 1.5rem auto; }
+.not-found-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+
 /* Typography & running text */
 .page-content pre,
 .post-content pre,

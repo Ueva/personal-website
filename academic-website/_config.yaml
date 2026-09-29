@@ -29,6 +29,10 @@ defaults:
   - scope: { path: "", type: "pages" }
     values:
       layout: page
+  # Keep shared papers accessible without listing them in the sitemap.
+  - scope: { path: "assets/papers" }
+    values:
+      sitemap: false
 
 # Custom variables.
 author:

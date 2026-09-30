@@ -46,7 +46,7 @@ socials:
 # Exclude from processing.
 exclude:
   - serve.ps1
-  - serve.ps1
+  - build.ps1
 #   - gemfiles/
 #   - Gemfile
 #   - Gemfile.lock

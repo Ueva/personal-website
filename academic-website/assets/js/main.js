@@ -1,159 +1,100 @@
-function onReady(callback) {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', callback);
-  } else {
-    callback();
-  }
-}
+// This script is deferred: the document is ready when it runs.
+(() => {
+  function initNavigation() {
+    const header = document.querySelector('.site-header');
+    const button = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('site-nav');
+    if (!header || !button || !nav) return;
 
-onReady(() => {
-  let activeBibtexStatus;
-  let bibtexFadeTimer;
-  let bibtexClearTimer;
-
-  function clearBibtexFeedback() {
-    clearTimeout(bibtexFadeTimer);
-    clearTimeout(bibtexClearTimer);
-    if (activeBibtexStatus) {
-      activeBibtexStatus.textContent = '';
-      activeBibtexStatus.classList.remove('is-fading');
-      activeBibtexStatus = null;
-    }
-  }
-  document.querySelectorAll('[data-copy-bibtex]').forEach((button) => {
-    const container = button.closest('.bibtex-copy');
-    const source = container.querySelector('[data-bibtex-source]');
-    const status = container.querySelector('[data-bibtex-status]');
-
-    button.addEventListener('click', async () => {
-      clearBibtexFeedback();
-      button.disabled = true;
-      status.textContent = '';
-      try {
-        await navigator.clipboard.writeText(source.value);
-        source.hidden = true;
-        clearBibtexFeedback();
-        activeBibtexStatus = status;
-        status.textContent = 'Copied!';
-        bibtexFadeTimer = setTimeout(() => status.classList.add('is-fading'), 1500);
-        bibtexClearTimer = setTimeout(clearBibtexFeedback, 2000);
-      } catch (error) {
-        source.hidden = false;
-        source.focus();
-        source.select();
-        status.textContent = 'Could not copy automatically. Copy the selected citation below.';
-      } finally {
-        button.disabled = false;
+    function closeMenu(restoreFocus = false) {
+      if ((restoreFocus || nav.contains(document.activeElement)) && getComputedStyle(button).display !== 'none') {
+        button.focus();
       }
-    });
-  });
-
-  const toggle = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('#site-nav');
-  const header = document.querySelector('.site-header');
-
-  if (toggle && nav && header) {
-    function setOverlayTop() {
-      const height = header.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--overlay-top', `${height}px`);
-    }
-
-    function openNav() {
-      setOverlayTop();
-      nav.classList.add('open');
-      toggle.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('nav-lock');
-      window.addEventListener('resize', setOverlayTop, { passive: true });
-    }
-
-    function closeNav() {
       nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('nav-lock');
-      window.removeEventListener('resize', setOverlayTop);
+      button.setAttribute('aria-expanded', 'false');
     }
-
-    window.matchMedia('(max-width: 1280px)').addEventListener('change', closeNav);
-
-    toggle.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (nav.classList.contains('open')) {
-        closeNav();
-      } else {
-        openNav();
+    button.addEventListener('click', () => {
+      const open = !nav.classList.contains('open');
+      nav.classList.toggle('open', open);
+      button.setAttribute('aria-expanded', String(open));
+    });
+    header.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        closeMenu(true);
+        event.preventDefault();
       }
     });
-
     nav.addEventListener('click', (event) => {
-      const link = event.target.closest('a');
-      if (link) closeNav();
+      if (event.target.closest('a')) closeMenu();
     });
-
-    nav.addEventListener('click', (event) => {
-      const list = nav.querySelector('ul');
-      if (list && !list.contains(event.target)) closeNav();
+    header.addEventListener('focusout', (event) => {
+      if (!header.contains(event.relatedTarget)) closeMenu();
     });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeNav();
+    document.addEventListener('click', (event) => {
+      if (!header.contains(event.target)) closeMenu();
     });
+    window.addEventListener('resize', () => {
+      // CSS owns the breakpoint; avoid a second hard-coded copy in JavaScript.
+      if (getComputedStyle(button).display === 'none') closeMenu();
+      else if (!nav.classList.contains('open') && nav.contains(document.activeElement)) button.focus();
+    });
+    header.classList.add('nav-enhanced');
   }
 
-  // Theme toggle (auto -> light -> dark)
-  const THEME_KEY = 'theme'; // values: 'auto' | 'light' | 'dark'
-  const root = document.documentElement;
-  const btn = document.getElementById('theme-toggle');
+  function initBibtexCopy() {
+    let active;
+    let fadeTimer;
+    let clearTimer;
+    let request = 0;
 
-  function applyTheme(mode) {
-    if (mode === 'light') {
-      root.setAttribute('data-theme', 'light');
-      if (btn) btn.textContent = 'Light';
-    } else if (mode === 'dark') {
-      root.setAttribute('data-theme', 'dark');
-      if (btn) btn.textContent = 'Dark';
-    } else {
-      root.removeAttribute('data-theme');
-      if (btn) btn.textContent = 'Auto';
+    function clearFeedback() {
+      clearTimeout(fadeTimer);
+      clearTimeout(clearTimer);
+      if (!active) return;
+      active.status.textContent = '';
+      active.status.classList.remove('is-fading');
+      active.fallback.hidden = true;
+      active.fallback.open = false;
+      active = null;
     }
-  }
 
-  function getStoredTheme() {
-    try {
-      return localStorage.getItem(THEME_KEY) || 'auto';
-    } catch (error) {
-      return 'auto';
-    }
-  }
-
-  function setStoredTheme(mode) {
-    try {
-      localStorage.setItem(THEME_KEY, mode);
-    } catch (error) {
-      // Keep the toggle usable when storage is unavailable.
-    }
-  }
-
-  const saved = getStoredTheme();
-  applyTheme(saved);
-
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const current = getStoredTheme();
-      const next = current === 'auto' ? 'light' : current === 'light' ? 'dark' : 'auto';
-      setStoredTheme(next);
-      applyTheme(next);
+    document.querySelectorAll('.bibtex-copy').forEach((container) => {
+      const button = container.querySelector('[data-copy-bibtex]');
+      const source = container.querySelector('[data-bibtex-source]');
+      const status = container.querySelector('[data-bibtex-status]');
+      const fallback = container.querySelector('details');
+      if (!button || !source || !status || !fallback) return;
+      const summary = fallback.querySelector('summary');
+      summary.classList.remove('button');
+      summary.textContent = 'Citation text';
+      button.hidden = false;
+      fallback.hidden = true;
+      button.addEventListener('click', async () => {
+        const currentRequest = ++request;
+        clearFeedback();
+        button.disabled = true;
+        try {
+          await navigator.clipboard.writeText(source.value);
+          if (currentRequest !== request) return;
+          active = { status, fallback };
+          status.textContent = 'Copied!';
+          fadeTimer = setTimeout(() => status.classList.add('is-fading'), 1500);
+          clearTimer = setTimeout(clearFeedback, 2000);
+        } catch {
+          if (currentRequest !== request) return;
+          active = { status, fallback };
+          fallback.hidden = false;
+          fallback.open = true;
+          status.textContent = 'Copy the selected citation below.';
+          source.focus();
+          source.select();
+        } finally {
+          button.disabled = false;
+        }
+      });
     });
   }
 
-  // If user is in Auto mode, respect system changes live
-  if (window.matchMedia) {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    media.addEventListener?.('change', () => {
-      const mode = getStoredTheme();
-      if (mode === 'auto') applyTheme('auto');
-    });
-  }
-
-});
+  initNavigation();
+  initBibtexCopy();
+})();

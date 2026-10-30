@@ -1,20 +1,13 @@
 source "https://rubygems.org"
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-
 gem "jekyll", "~> 4.3.4"
 
-# Jekyll Plugins
+# Used by the data validator, not by page rendering.
+gem "bibtex-ruby", "~> 6.2"
+gem "nokogiri", "~> 1.18"
+
+# Jekyll plugins and compatibility dependencies.
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
-  gem "jekyll-paginate-v2", "~> 3.0"
-  gem "jekyll-scholar", "~> 7.2"
-  gem "jekyll-seo-tag", "~> 2.8"
   gem "jekyll-sitemap", "~> 1.4"
   gem "csv", "~> 3.0"
   gem "base64", "~> 0.3.0"

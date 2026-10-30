@@ -13,7 +13,8 @@ This site contains information about Joshua B. Evans' research, publications, te
 - [Homepage](https://ueva.dev/): Overview of Joshua B. Evans' academic role, research interests, reinforcement learning teaching, student supervision, featured research, and recent news.
 - [Publications](https://ueva.dev/publications.html): Publication list with bibliographic information, summaries, and links to papers, preprints, supplementary material, and source code where available.
 - [News](https://ueva.dev/news.html): Chronological record of research publications, conference presentations, teaching developments, academic appointments, awards, and other professional activities.
-- [Supervision](https://ueva.dev/supervision.html): Undergraduate and master's dissertation projects supervised by Joshua B. Evans, including project titles and student programmes.
+- [Doctoral supervision](https://ueva.dev/phds.html): Current and former doctoral students, research topics, their thesis information, and opportunities for future supervision.
+- [Dissertation supervision](https://ueva.dev/supervision.html): Undergraduate and master's dissertation projects supervised by Joshua B. Evans, including project titles and student programmes.
 - [Software](https://ueva.dev/software.html): Research software for reinforcement learning, including SimpleOptions, SimpleEnvs, and OfficeWorld, with links to their source repositories.
 
 ## Contact and Profiles

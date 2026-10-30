@@ -1,2 +1,3 @@
 baseurl: ""
 url: "http://localhost:4000"
+destination: _site_dev

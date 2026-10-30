@@ -7,8 +7,8 @@
 #       - Hierarchical reinforcement learning
 #       - Continual learning
 # All fields except name and start_date are optional.
-# To use an example, uncomment its entry under students: and replace its values.
-# The names, topics, dates, and links below are fictional examples.
+# The commented examples below demonstrate all supported fields.
+# To use one, uncomment its entry under students: and replace its fictional values.
 students:
   - name: "Shane A. R. Dickens"
     qualification: "PhD"

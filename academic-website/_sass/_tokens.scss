@@ -1,0 +1,49 @@
+// One source for each palette; Auto follows the operating system.
+@mixin light-colours {
+  --bg: #FAF5E7;
+  --fg: #3A2F22;
+  --muted: #7E6D57;
+  --link: #895900;
+  --link-visited: #795734;
+  --border: #D9D0C0;
+  --accent: #98610F;
+  --code-bg: #EFE6D3;
+  --code-fg: #3A2F22;
+  --shadow: 0 2px 10px rgba(0, 0, 0, .06);
+  --btn-primary-fg: #FFFFFF;
+  --nested-card-bg: color-mix(in srgb, var(--bg) 94%, black);
+}
+@mixin dark-colours {
+  --bg: #221B13;
+  --fg: #E8DCC3;
+  --muted: #A6957C;
+  --link: #E8B44C;
+  --link-visited: #C5914A;
+  --border: #3A2F22;
+  --accent: #FFCB6B;
+  --code-bg: #2A2219;
+  --code-fg: #F0E6D3;
+  --shadow: none;
+  --btn-primary-fg: #221B13;
+  --nested-card-bg: color-mix(in srgb, var(--bg) 99%, white);
+}
+:root {
+  @include light-colours;
+  --radius: 14px;
+  --read-w: clamp(60ch, 70vw, 110ch);
+  --container: clamp(60ch, 70vw, 110ch);
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) { @include dark-colours; }
+}
+:root[data-theme="light"] { @include light-colours; }
+:root[data-theme="dark"] { @include dark-colours; }
+@media (min-width: 1600px) {
+  :root { --read-w: clamp(56ch, 54vw, 120ch); --container: clamp(56ch, 54vw, 120ch); }
+}

@@ -1,7 +1,8 @@
 title: Structural Analogies as Posterior Transfer in Continual Reinforcement Learning (GenPlan 2026)
+type: workshop
 date: 2026-05-30
 description: We use graph matching to identify recurring structure and transfer knowledge between similar regions of an environment in continual reinforcement learning. We show when these analogies improve learning, balancing the benefit of reusing past experience against errors caused by imperfect structural matches.
-workshop: /assets/papers/2026_06_GenPlan_TraversoEvansSprekelerToussaint.pdf
+paper: /assets/papers/2026_06_GenPlan_TraversoEvansSprekelerToussaint.pdf
 reference: 'Traverso, S., Evans, J.B., Sprekeler, H., and Toussaint, M. (2026). "Structural analogies as posterior transfer in continual reinforcement learning: When does analogy help?". 9th Workshop on Generalization in Planning at ICAPS.'
 bibtex: |-
   @inproceedings{traverso2026structural,

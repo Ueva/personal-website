@@ -1,0 +1,28 @@
+- id: university
+  username: "Joshua B. Evans"
+  label: University of Bath
+  url: https://researchportal.bath.ac.uk/en/persons/joshua-evans/
+- id: scholar
+  username: "Joshua B. Evans"
+  label: Scholar
+  url: https://scholar.google.com/citations?user=-8FHC20AAAAJ
+  footer: true
+- id: orcid
+  username: "0009-0003-8593-600X"
+  label: ORCID
+  url: https://orcid.org/0009-0003-8593-600X
+  footer: true
+- id: github
+  username: "Ueva"
+  label: GitHub
+  url: https://github.com/Ueva
+  footer: true
+- id: linkedin
+  username: "jb-evans"
+  label: LinkedIn
+  url: https://www.linkedin.com/in/jb-evans/
+  footer: true
+- id: twitter
+  username: "@TheJEvns"
+  label: Twitter / X
+  url: https://x.com/TheJEvns

@@ -1,0 +1,6 @@
+- title: Conference and Journal Papers
+  types: [conference, journal]
+- title: Workshop Papers
+  types: [workshop]
+- title: Preprints
+  types: [preprint]

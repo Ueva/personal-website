@@ -25,20 +25,20 @@ nav_title: Blog
         <h2 class="mt-0">{{ year.name }}</h2>
 
         {% for post in year.items %}
-        <article class="card" style="margin-bottom: var(--space-4);">
+        <article class="card publication">
             <header>
-                <h3 class="mt-0" style="margin-bottom:.3rem;">
-                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <h3 class="mt-0">
+                    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
                 </h3>
-                <p class="small" style="margin-top:0;">
+                <p class="small publication-reference">
                     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
-                    {% if post.author or site.author.name %} · {{ post.author | default: site.author.name }}{% endif %}
+                    {% if post.author or site.author.name %} · {{ post.author | default: site.author.name | escape }}{% endif %}
                 </p>
             </header>
 
             {% assign blurb = post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 260
             %}
-            <p>{{ blurb }}</p>
+            <p>{{ blurb | escape_once }}</p>
 
             <div class="card-actions">
                 <a class="button primary" href="{{ post.url | relative_url }}">Read Post »</a>

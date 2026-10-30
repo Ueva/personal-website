@@ -15,53 +15,12 @@ nav_title: Software
 </section>
 
 <section class="page-content">
-    {% assign raw = site.data.software %}
-
-    {% if raw == nil %}
-    <div class="card">
-        <h2 class="mt-0">No software entries found</h2>
-        <p class="small">Add entries under <code>_data/software.yml</code> or as multiple files under
-            <code>_data/software/</code>.
-        </p>
-    </div>
-    {% else %}
-
-    {%- comment -%}
-    Normalise to a flat array: raw may be an array, or a hash from multiple files
-    {%- endcomment -%}
-    {% assign items = '' | split: '' %}
-    {% if raw.first and raw.first[1] %}
-    {% for pair in raw %}{% assign items = items | push: pair[1] %}{% endfor %}
-    {% else %}
-    {% assign items = raw %}
-    {% endif %}
-
-    {% if items == empty %}
-    <div class="card">
-        <h2 class="mt-0">No software entries found</h2>
-        <p class="small">Parsed <code>_data/software*</code> but found no items.</p>
-    </div>
-    {% else %}
-
-    {% for project in items %}
-    {% if project.title %}
-    <article class="card" style="margin-bottom: var(--space-4);">
-        <header>
-            <h3 class="mt-0" style="margin-bottom:.3rem;">{{ project.title }}</h3>
-        </header>
-
-        {% if project.description %}
-        <p>{{ project.description }}</p>
-        {% endif %}
-
-        <div class="card-actions">
-            {% if project.url %}
-            <a class="button primary" href="{{ project.url }}" target="_blank" rel="noopener">GitHub »</a>
-            {% endif %}
-        </div>
+    {% for entry in site.data.software %}
+    {% assign project = entry[1] %}
+    <article class="card publication">
+        <h2 class="mt-0">{{ project.title | escape }}</h2>
+        <p>{{ project.description | escape }}</p>
+        <div class="card-actions"><a class="button primary" href="{{ project.url | escape }}" target="_blank" rel="noopener">GitHub &raquo;</a></div>
     </article>
-    {% endif %}
     {% endfor %}
-    {% endif %}
-    {% endif %}
 </section>

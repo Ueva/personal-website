@@ -1,0 +1,21 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Data, scripts, and styles use two spaces.
+[*.{yaml,yml,json,js,scss,rb}]
+indent_size = 2
+
+# HTML templates, PowerShell, and Python use four spaces.
+[*.{html,ps1,py}]
+indent_size = 4
+
+# Two trailing spaces can represent an intentional Markdown line break.
+[*.md]
+trim_trailing_whitespace = false

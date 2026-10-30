@@ -34,7 +34,7 @@ nav_title: Doctoral Supervision
 </section>
 {% endif %}
 
-{% assign students = site.data.phd_students.students | where_exp: 's', 's.name and s.start_date' %}
+{% assign students = site.data.phd_students.students %}
 {% assign current = students | where_exp: 's', 's.end_date == nil or s.end_date == empty' | sort: 'start_date' %}
 {% assign former = students | where_exp: 's', 's.end_date != nil and s.end_date != empty' | sort: 'end_date' %}
 

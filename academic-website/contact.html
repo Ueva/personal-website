@@ -13,25 +13,14 @@ nav_title: Contact
 </section>
 
 <section class="page-content">
-    <!-- Three-up on large screens, single column otherwise (reuses features-3 grid) -->
-    <div class="features-1">
+    <div>
 
         <!-- Emails -->
         <div class="card">
             <h2 class="mt-0">Email</h2>
-            <p><strong>Academic:</strong>
-                <span>jbe25</span> <span class="small" aria-hidden="true">at</span>
-                <span>bath</span> <span class="small" aria-hidden="true">dot</span>
-                <span>ac</span> <span class="small" aria-hidden="true">dot</span>
-                <span>uk</span>
-            </p>
-            <p><strong>Professional:</strong>
-                <span>jbevans</span> <span class="small" aria-hidden="true">dot</span>
-                <span>cs</span> <span class="small" aria-hidden="true">at</span>
-                <span>gmail</span> <span class="small" aria-hidden="true">dot</span>
-                <span>com</span>
-            </p>
-            <p class="small">Tip: replace "at" with @ and "dot" with .</p>
+            <p><strong>Academic:</strong> {% include email-address.html address=site.author.email %}</p>
+            <p><strong>Professional:</strong> {% include email-address.html address=site.author.professional_email %}</p>
+            <p class="small">Replace [at] with @ and [dot] with a full stop.</p>
         </div>
 
         <!-- Location -->
@@ -50,17 +39,14 @@ nav_title: Contact
         <!-- Profiles -->
         <div class="card">
             <h2 class="mt-0">Profiles</h2>
-            <p><strong>University of Bath:</strong> <a
-                    href="https://researchportal.bath.ac.uk/en/persons/joshua-evans/" target="_blank"
-                    rel="noopener">Research profile</a></p>
-            <p><strong>ORCID:</strong> <a href="https://orcid.org/0009-0003-8593-600X" target="_blank"
-                    rel="noopener">0009-0003-8593-600X</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jb-evans" target="_blank"
-                    rel="noopener">jb-evans</a></p>
-
-            <p><strong>GitHub:</strong> <a href="https://github.com/Ueva" target="_blank" rel="noopener">Ueva</a></p>
-            <p><strong>Twitter / X:</strong> <a href="https://twitter.com/TheJEvns" target="_blank"
-                    rel="noopener">@TheJEvns</a></p>
+            <ul class="profile-grid">
+                {% for profile in site.data.profiles %}
+                <li><a class="profile-link" href="{{ profile.url | escape }}" target="_blank" rel="noopener">
+                    <span class="profile-service">{{ profile.label | escape }}</span>
+                    <span class="profile-username">{{ profile.username | escape }}</span>
+                </a></li>
+                {% endfor %}
+            </ul>
         </div>
 
     </div>

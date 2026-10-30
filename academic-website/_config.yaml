@@ -1,5 +1,4 @@
 title: Joshua B. Evans
-email: jbe25@bath.ac.uk
 description: Joshua B. Evans is a lecturer at the University of Bath, where his research focuses on hierarchical reinforcement learning, skill discovery, and other aspects of artificial intelligence and machine learning.
 image: /assets/images/profile_pic.png
 
@@ -9,9 +8,6 @@ image: /assets/images/profile_pic.png
 # Plugins list.
 plugins:
   - jekyll-feed
-  - jekyll-paginate-v2
-  - jekyll-scholar
-  - jekyll-seo-tag
   - jekyll-last-modified-at
   - jekyll-sitemap
 
@@ -34,24 +30,22 @@ defaults:
     values:
       sitemap: false
 
-# Custom variables.
+# Shared identity.
 author:
   name: Joshua B. Evans
   affiliation: University of Bath
+  affiliation_url: https://www.bath.ac.uk/
+  job_title: Lecturer in Computer Science and Artificial Intelligence
   email: jbe25@bath.ac.uk
-socials:
-  twitter: TheJEvns
-  github: Ueva
+  professional_email: jbevans.cs@gmail.com
+  lab_name: Bath Reinforcement Learning Laboratory
+  lab_url: https://bathrllab.github.io/
 
-# Exclude from processing.
 exclude:
+  - _site
+  - _site_dev
   - serve.ps1
   - build.ps1
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+  - check.ps1
+  - scripts
+  - README.md

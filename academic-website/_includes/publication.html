@@ -1,0 +1,20 @@
+{% assign paper = include.paper %}
+<article class="card publication">
+    <header>
+        <h3 class="mt-0">{{ paper.title | escape }}</h3>
+        <p class="small publication-reference">
+            <time datetime="{{ paper.date | date: '%Y-%m' }}">{{ paper.date | date: "%B %Y" }}</time>
+            {% if paper.reference %}&middot; {{ paper.reference | escape }}{% endif %}
+        </p>
+    </header>
+    {% if paper.description %}<p>{{ paper.description }}</p>{% endif %}
+    <div class="card-actions">
+        {% include paper-link.html paper=paper %}
+        {% if paper.type != 'preprint' and paper.preprint %}
+        <a class="button" href="{{ paper.preprint | relative_url | escape }}" target="_blank" rel="noopener">Preprint &raquo;</a>
+        {% endif %}
+        {% if paper.supplement %}<a class="button" href="{{ paper.supplement | relative_url | escape }}" target="_blank" rel="noopener">Appendices &raquo;</a>{% endif %}
+        {% if paper.code %}<a class="button" href="{{ paper.code | escape }}" target="_blank" rel="noopener">Code &raquo;</a>{% endif %}
+        {% include bibtex-button.html paper=paper %}
+    </div>
+</article>

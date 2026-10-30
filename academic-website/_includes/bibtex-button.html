@@ -1,7 +1,10 @@
 {% if include.paper.bibtex %}
-<span class="bibtex-copy">
-    <button class="button" type="button" data-copy-bibtex aria-label="Copy BibTeX for {{ include.paper.title | escape }}">BibTeX »</button>
+<div class="bibtex-copy">
+    <button class="button" type="button" data-copy-bibtex aria-label="Copy BibTeX for {{ include.paper.title | escape }}" hidden>BibTeX &raquo;</button>
     <span class="small" role="status" data-bibtex-status></span>
-    <textarea hidden readonly rows="8" cols="60" aria-label="BibTeX citation for {{ include.paper.title | escape }}" data-bibtex-source>{{ include.paper.bibtex | escape }}</textarea>
-</span>
+    <details class="bibtex-fallback">
+        <summary class="button">BibTeX &raquo;</summary>
+        <textarea readonly rows="8" aria-label="BibTeX citation for {{ include.paper.title | escape }}" data-bibtex-source>{{ include.paper.bibtex | escape }}</textarea>
+    </details>
+</div>
 {% endif %}

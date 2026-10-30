@@ -1,4 +1,5 @@
 title: Learning The Minimum Action Distance (ICML 2026)
+type: conference
 date: 2026-05-30
 description: We propose a novel method for learning the <strong>minimum action distance</strong> in reinforcement learning. Our approach uses quasimetrics to model asymmetric distances in directed environments, leading to more accurate estimates that improve performance on downstream tasks.
 paper: /assets/papers/2026_04_ICML_SteccanellaEvansSimsekJonsson.pdf

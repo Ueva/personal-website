@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 
 <head>
     {% include head.html %}
@@ -8,11 +8,11 @@
 <body>
     <a class="skip-link" href="#content">Skip to content</a>
     {% include header.html %}
-    <main id="content" class="container" style="flex:1">
+    <main id="content" class="container main-content" tabindex="-1">
         {{ content }}
     </main>
     {% include footer.html %}
-    <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+    <script src="{% include asset-url.html path='/assets/js/main.js' %}" defer></script>
 </body>
 
 </html>

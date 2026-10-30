@@ -6,7 +6,7 @@ layout: default
         <h1 class="post-title">{{ page.title | escape }}</h1>
         <p class="post-meta">
             <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
-            {% if page.author or site.author.name %} · {{ page.author | default: site.author.name }}{% endif %}
+            {% if page.author or site.author.name %} · {{ page.author | default: site.author.name | escape }}{% endif %}
         </p>
     </header>
     <section class="post-content">

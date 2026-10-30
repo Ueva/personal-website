@@ -1,0 +1,8 @@
+{% if include.paper.type == 'preprint' %}
+{% assign main_url = include.paper.preprint %}
+{% assign main_label = 'Preprint' %}
+{% else %}
+{% assign main_url = include.paper.paper %}
+{% assign main_label = 'Paper' %}
+{% endif %}
+<a class="button primary" href="{{ main_url | relative_url | escape }}" target="_blank" rel="noopener">{{ main_label }} &raquo;</a>

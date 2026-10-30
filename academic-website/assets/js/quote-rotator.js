@@ -1,90 +1,77 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const quotesEl = document.getElementById('quotes-data');
-  const quoteText = document.getElementById('quote-text');
-  const quoteAuthor = document.getElementById('quote-author');
+(() => {
+  const data = document.getElementById('quotes-data');
+  const text = document.getElementById('quote-text');
+  const author = document.getElementById('quote-author');
+  const button = document.getElementById('quote-toggle');
   const progress = document.querySelector('.quote-progress');
-  const quoteIntervalMs = 15000;
+  if (!data || !text || !author || !button) return;
 
-  if (!quotesEl || !quoteText || !quoteAuthor) return;
+  const quotes = JSON.parse(data.textContent);
+  if (quotes.length < 2) return;
+  const interval = 15000;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let paused = reducedMotion.matches;
+  let index = 0;
+  let timer;
+  let progressAnimation;
 
-  try {
-    const quotes = JSON.parse(quotesEl.textContent);
-    if (!Array.isArray(quotes) || !quotes.length) return;
+  let remaining = interval;
+  let startedAt = null;
 
-    let currentQuoteIndex = -1;
-
-    function sanitizeQuoteHtml(html) {
-      const allowedTags = new Set(['B', 'BR', 'EM', 'I', 'STRONG']);
-      const template = document.createElement('template');
-      template.innerHTML = html;
-
-      function cleanNode(node) {
-        Array.from(node.childNodes).forEach((child) => {
-          if (child.nodeType !== Node.ELEMENT_NODE) return;
-
-          if (!allowedTags.has(child.tagName)) {
-            child.replaceWith(document.createTextNode(child.textContent));
-            return;
-          }
-
-          Array.from(child.attributes).forEach((attribute) => {
-            child.removeAttribute(attribute.name);
-          });
-
-          cleanNode(child);
-        });
-      }
-
-      cleanNode(template.content);
-      return template.innerHTML;
+  function stop() {
+    clearTimeout(timer);
+    if (startedAt !== null) {
+      remaining = Math.max(0, remaining - (performance.now() - startedAt));
+      startedAt = null;
     }
-
-    function formatQuoteText(text) {
-      const quoteHtml = String(text)
-        .replace(/\r\n?/g, '\n')
-        .replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>')
-        .replace(/\*(.+?)\*/gs, '<em>$1</em>')
-        .replace(/\n/g, '<br>');
-
-      return `\u201c${sanitizeQuoteHtml(quoteHtml)}\u201d`;
+    if (progressAnimation) {
+      progressAnimation.pause();
+      progressAnimation.currentTime = interval - remaining;
     }
-
-    function getRandomQuoteIndex() {
-      if (quotes.length === 1) return 0;
-
-      let nextQuoteIndex = currentQuoteIndex;
-      while (nextQuoteIndex === currentQuoteIndex) {
-        nextQuoteIndex = Math.floor(Math.random() * quotes.length);
-      }
-
-      return nextQuoteIndex;
-    }
-
-    function restartProgress() {
-      if (!progress) return;
-
-      progress.style.setProperty('--quote-cycle-duration', `${quoteIntervalMs}ms`);
-      progress.classList.remove('is-running');
-      void progress.offsetWidth;
-      progress.classList.add('is-running');
-    }
-
-    function showRandomQuote() {
-      currentQuoteIndex = getRandomQuoteIndex();
-      const quote = quotes[currentQuoteIndex];
-      if (!quote) return;
-
-      quoteText.innerHTML = formatQuoteText(quote.text);
-      quoteAuthor.textContent = `\u2013 ${quote.author}`;
-      restartProgress();
-    }
-
-    showRandomQuote();
-
-    if (quotes.length > 1) {
-      window.setInterval(showRandomQuote, quoteIntervalMs);
-    }
-  } catch (error) {
-    console.warn('Unable to parse quotes data', error);
   }
-});
+
+  function update() {
+    stop();
+    const label = paused ? 'Resume Quotes' : 'Pause Quotes';
+    button.setAttribute('aria-label', label);
+    button.title = label;
+    button.setAttribute('aria-pressed', String(paused));
+    if (paused || document.hidden) return;
+    const bar = progress?.firstElementChild;
+    if (bar?.animate && !reducedMotion.matches) {
+      if (!progressAnimation) {
+        progressAnimation = bar.animate(
+          [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+          { duration: interval, easing: 'linear', fill: 'forwards' }
+        );
+      }
+      progressAnimation.currentTime = interval - remaining;
+      progressAnimation.play();
+    }
+    startedAt = performance.now();
+    timer = setTimeout(() => {
+      startedAt = null;
+      remaining = interval;
+      progressAnimation?.cancel();
+      progressAnimation = null;
+      index = (index + 1 + Math.floor(Math.random() * (quotes.length - 1))) % quotes.length;
+      // HTML is rendered once by Jekyll from trusted, locally maintained quote data.
+      text.innerHTML = quotes[index].html;
+      author.textContent = `\u2013 ${quotes[index].author}`;
+      update();
+    }, remaining);
+  }
+
+  button.hidden = false;
+  button.addEventListener('click', () => { paused = !paused; update(); });
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) {
+      paused = true;
+      progressAnimation?.cancel();
+      progressAnimation = null;
+    }
+    update();
+  });
+  document.addEventListener('visibilitychange', update);
+  update();
+})();

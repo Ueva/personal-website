@@ -27,17 +27,7 @@ nav_title: Dissertation Supervision
     </p>
 </section>
 
-{% comment %}
-Load students from `_data/project_students.yaml` → students: [ ... ]
-Guard against nils; group by year (descending); sort students by name within each year.
-{% endcomment %}
-{% assign ds = site.data.project_students %}
-{% assign items = ds.students | default: '' | split: '' %}
-{% if ds and ds.students %}
-{% assign items = ds.students %}
-{% endif %}
-
-{% assign items = items | where_exp: 's', 's and s.year and s.name' %}
+{% assign items = site.data.project_students.students %}
 
 {%- comment -%}
 Group by year, then sort groups by year name descending.
@@ -54,13 +44,13 @@ Group by year, then sort groups by year name descending.
     {% for s in byname %}
     <p class="student-entry">
         {% if s.url %}
-        <strong><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a></strong>
+        <strong><a href="{{ s.url | escape }}" target="_blank" rel="noopener">{{ s.name | escape }}</a></strong>
         {% else %}
-        <strong>{{ s.name }}</strong>
+        <strong>{{ s.name | escape }}</strong>
         {% endif %}
-        <span class="small">{{ s.degree }}</span>
+        <span class="small">{{ s.degree | escape }}</span>
         <br>
-        <em>{{ s.thesis }}</em>
+        <em>{{ s.thesis | escape }}</em>
     </p>
     {% endfor %}
 </section>

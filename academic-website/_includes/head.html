@@ -15,7 +15,7 @@
 {%- assign configured_description = site.data.page_descriptions[page.url] -%}
 {%- assign meta_description = page.description | default: configured_description | default: page.excerpt |
 default: site.description | strip_html | normalize_whitespace | truncate: 160 -%}
-<meta name="description" content="{{ meta_description }}">
+<meta name="description" content="{{ meta_description | escape_once }}">
 
 {%- if page.noindex or site.noindex -%}
 <meta name="robots" content="noindex, nofollow">
@@ -26,20 +26,16 @@ default: site.description | strip_html | normalize_whitespace | truncate: 160 -%
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
 
-<!-- Preconnect to Google Font Domains -->
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;500;600;700&family=STIX+Two+Math&display=swap"
-    rel="stylesheet">
-
+<!-- Preload the primary STIX2 face; other subsets/styles load only as needed. -->
+<link rel="preload" href="{{ '/assets/fonts/stix-two-text-v18-normal-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
 <!-- RSS/Atom (if you use jekyll-feed or provide feed.xml) -->
 <link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }} Feed"
     href="{{ '/feed.xml' | absolute_url }}">
 
 <!-- Main stylesheet -->
-<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<script src="{% include asset-url.html path='/assets/js/theme.js' %}"></script>
+<link rel="stylesheet" href="{% include asset-url.html path='/assets/css/main.css' %}">
 
 <!-- Theme color per scheme (nice address bar tint on mobile) -->
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAF5E7">
@@ -48,24 +44,23 @@ default: site.description | strip_html | normalize_whitespace | truncate: 160 -%
 <!-- Open Graph (Facebook/LinkedIn/etc.) -->
 <meta property="og:site_name" content="{{ site.title | escape }}">
 <meta property="og:title" content="{{ full_title | escape }}">
-<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:description" content="{{ meta_description | escape_once }}">
 <meta property="og:type"
     content="{% if page.layout == 'post' or page.collection == 'posts' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 {%- assign og_image = page.image | default: site.image -%}
 {%- if og_image -%}
 <meta property="og:image" content="{{ og_image | absolute_url }}">
-<meta property="og:image:alt" content="{{ page.image_alt | default: 'Portrait of Joshua B. Evans' | escape }}">
+{% assign default_image_alt = 'Portrait of ' | append: site.author.name %}
+<meta property="og:image:alt" content="{{ page.image_alt | default: default_image_alt | escape }}">
 {%- endif -%}
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="{{ page.twitter_card | default: 'summary' }}">
-{%- assign twitter_username = site.twitter_username | default: site.socials.twitter -%}
-{%- if twitter_username -%}
-<meta name="twitter:site" content="@{{ twitter_username | replace:'@','' }}">
-{%- endif -%}
+{% assign twitter = site.data.profiles | where: 'id', 'twitter' | first %}
+{% if twitter %}<meta name="twitter:site" content="@{{ twitter.username | remove: '@' | escape }}">{% endif %}
 <meta name="twitter:title" content="{{ full_title | escape }}">
-<meta name="twitter:description" content="{{ meta_description }}">
+<meta name="twitter:description" content="{{ meta_description | escape_once }}">
 {%- if og_image -%}
 <meta name="twitter:image" content="{{ og_image | absolute_url }}">
 {%- endif -%}
@@ -94,22 +89,22 @@ default: site.description | strip_html | normalize_whitespace | truncate: 160 -%
     {
       "@type": "Person",
       "@id": {{ '/#person' | absolute_url | jsonify }},
-      "name": {{ site.author.name | default: 'Joshua B. Evans' | jsonify }},
+      "name": {{ site.author.name | jsonify }},
       "alternateName": ["Joshua Evans", "Joshua B Evans"],
       "honorificPrefix": "Dr",
       "url": {{ '/' | absolute_url | jsonify }},
-      "image": {{ '/assets/images/profile_pic.png' | absolute_url | jsonify }},
+      "image": {{ site.image | absolute_url | jsonify }},
       "description": {{ site.description | jsonify }},
-      "jobTitle": "Lecturer in Computer Science and Artificial Intelligence",
+      "jobTitle": {{ site.author.job_title | jsonify }},
       "worksFor": {
         "@type": "CollegeOrUniversity",
-        "name": "University of Bath",
-        "url": "https://www.bath.ac.uk/"
+        "name": {{ site.author.affiliation | jsonify }},
+        "url": {{ site.author.affiliation_url | jsonify }}
       },
       "memberOf": {
         "@type": "Organization",
-        "name": "Bath Reinforcement Learning Laboratory",
-        "url": "https://bathrllab.github.io/"
+        "name": {{ site.author.lab_name | jsonify }},
+        "url": {{ site.author.lab_url | jsonify }}
       },
       "knowsAbout": [
         "Artificial intelligence",
@@ -119,25 +114,20 @@ default: site.description | strip_html | normalize_whitespace | truncate: 160 -%
         "World models",
         "Representation learning"
       ],
-      "sameAs": [
-        "https://researchportal.bath.ac.uk/en/persons/joshua-evans/",
-        "https://orcid.org/0009-0003-8593-600X",
-        "https://scholar.google.com/citations?user=-8FHC20AAAAJ",
-        "https://github.com/Ueva",
-        "https://www.linkedin.com/in/jb-evans/",
-        "https://x.com/TheJEvns"
-      ]
+      "sameAs": {{ site.data.profiles | map: 'url' | jsonify }}
     }
   ]
 }
 </script>
 
-<!-- Google Analytics (GA4) -->
+{% if jekyll.environment == 'production' and site.analytics_id %}
+<!-- Google Analytics (production only) -->
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEW51VGG79"></script>
-<script defer>
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics_id | escape }}"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag("js", new Date());
-    gtag("config", "G-QEW51VGG79");
+    gtag("config", {{ site.analytics_id | jsonify }});
 </script>
+{% endif %}

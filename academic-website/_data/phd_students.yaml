@@ -1,0 +1,56 @@
+# Dates use quoted YYYY-MM-DD values.
+# Omit end_date (or leave it empty) for current students; add it for former students.
+# Current students sort by start_date; former students sort by end_date, oldest first.
+# topics is a list of research areas; thesis_title is the eventual thesis title.
+# For multiple topics:
+#     topics:
+#       - Hierarchical reinforcement learning
+#       - Continual learning
+# All fields except name and start_date are optional.
+# To use an example, uncomment its entry under students: and replace its values.
+# The names, topics, dates, and links below are fictional examples.
+students:
+  - name: "Shane A. R. Dickens"
+    qualification: "PhD"
+    start_date: "2025-05-01"
+    end_date: ""
+    topics:
+      - "Hierarchical Reinforcement Learning"
+      - "Continual Reinforcement Learning"
+    thesis_title: "Unsupervised Skill Discovery for Continual Reinforcement Learning"
+    role: "Co-supervision with Prof. Özgür Şimşek"
+
+  - name: "Harvey Ayling"
+    qualification: "PhD"
+    start_date: "2025-09-29"
+    end_date: ""
+    topics:
+      - "Hierarchical Reinforcement Learning"
+    thesis_title: "Scalable Temporal Abstraction in Reinforcement Learning"
+    role: "Co-supervision with Prof. Özgür Şimşek"
+
+# Current student: end_date must remain empty (or be omitted).
+# A working thesis title and link are shown to demonstrate every supported field;
+# omit them until they are available for a real student.
+#   - name: "Alex Example"
+#     qualification: "PhD"
+#     start_date: "2026-10-01"
+#     end_date: ""
+#     topics:
+#       - "Hierarchical reinforcement learning"
+#     thesis_title: "Learning Reusable Skills for Long-Horizon Decision Making"
+#     thesis_link: "https://example.com/alex/working-thesis"
+#     url: "https://example.com/alex"
+#     role: "Primary supervisor"
+
+# Former student: a populated end_date places this entry in Former Students.
+#   - name: "Sam Example"
+#     qualification: "PhD"
+#     start_date: "2021-10-01"
+#     end_date: "2025-09-30"
+#     topics:
+#       - "Transfer in reinforcement learning"
+#     thesis_title: "Structural Knowledge Transfer for Efficient Reinforcement Learning"
+#     thesis_link: "https://example.com/sam/thesis"
+#     url: "https://example.com/sam"
+#     role: "Co-supervisor"

@@ -1,0 +1,54 @@
+{% assign student = include.student %}
+<article class="card doctoral-student">
+    <header class="doctoral-student-profile">
+        <div class="doctoral-student-identity">
+        <h3 class="doctoral-student-name">
+            {% if student.url and student.url != empty %}
+            <a href="{{ student.url | escape }}" target="_blank" rel="noopener">{{ student.name | escape }}</a>
+            {% else %}
+            {{ student.name | escape }}
+            {% endif %}
+        </h3>
+        <p class="doctoral-student-dates">
+            <time datetime="{{ student.start_date | date: '%Y-%m-%d' }}">{{ student.start_date | date: '%B %Y' }}</time>
+            &ndash;
+            {% if student.end_date and student.end_date != empty %}
+            <time datetime="{{ student.end_date | date: '%Y-%m-%d' }}">{{ student.end_date | date: '%B %Y' }}</time>
+            {% else %}
+            present
+            {% endif %}
+        </p>
+        </div>
+        {% if student.qualification and student.qualification != empty %}
+        <p class="doctoral-student-qualification">{{ student.qualification | escape }}</p>
+        {% endif %}
+    </header>
+    <div class="doctoral-student-research">
+        {% if student.thesis_title and student.thesis_title != empty %}
+        <p class="doctoral-student-thesis">
+            {% if student.thesis_link and student.thesis_link != empty %}
+            <a href="{{ student.thesis_link | escape }}" target="_blank" rel="noopener">{{ student.thesis_title | escape }}</a>
+            {% else %}
+            {{ student.thesis_title | escape }}
+            {% endif %}
+            {% if student.end_date == nil or student.end_date == empty %}
+            <span class="doctoral-student-provisional">(Provisional)</span>
+            {% endif %}
+        </p>
+        {% endif %}
+        {% if student.topics and student.topics != empty %}
+        <ul class="doctoral-student-topics" aria-label="Research topics">
+            {% for topic in student.topics %}
+            {% assign topic_text = topic | strip %}
+            {% if topic_text != empty %}<li>{{ topic_text | escape }}</li>{% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </div>
+    {% if student.role and student.role != empty %}
+    <footer class="doctoral-student-meta">
+        <p class="doctoral-student-role">{{ student.role | escape }}</p>
+    </footer>
+    {% endif %}
+</article>

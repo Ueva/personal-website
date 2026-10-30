@@ -73,6 +73,8 @@ onReady(() => {
       window.removeEventListener('resize', setOverlayTop);
     }
 
+    window.matchMedia('(max-width: 1280px)').addEventListener('change', closeNav);
+
     toggle.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();

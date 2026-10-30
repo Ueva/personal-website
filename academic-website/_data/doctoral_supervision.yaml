@@ -1,0 +1,11 @@
+# Set accepting_students to true when advertising doctoral opportunities.
+accepting_students: false
+closed_message: "I am not currently accepting new doctoral students. Future opportunities will be advertised here."
+open_message: "I am currently accepting new doctoral students. Please see the opportunities below."
+
+# Optional advertised projects, each with a title and url.
+# opportunities:
+#   - title: "Project title"
+#     url: "https://example.com/project"
+opportunities: []
+

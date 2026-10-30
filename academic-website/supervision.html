@@ -1,25 +1,37 @@
 ---
 layout: page
-title: Supervision
-seo_title: Student Supervision by Joshua B. Evans
-nav_order: 4
-nav_title: Supervision
+title: Dissertation Project Supervision
+seo_title: Dissertation Project Supervision by Joshua B. Evans
+nav_order: 4.5
+nav_title: Dissertation Supervision
 ---
 
 <p>
-    Here, you can find a list of undergraduate and master's students I have supervised in the past, along with their
-    dissertation topics.
+    Below are the undergraduate and master's students I have supervised and their dissertation topics.
+    For information about my doctoral supervision, see my <a href="{{ '/phds.html' | relative_url }}">doctoral
+        supervision page</a>.
 </p>
 
-<p class="callout info">
-    If you are a student interested in undertaking a reinforcement learning project, please get in touch!
-</p>
+<section class="card" aria-labelledby="dissertation-enquiries">
+    <h2 class="mt-0" id="dissertation-enquiries">Dissertation Enquiries</h2>
+    <p>
+        I supervise BSc, MComp, and MSc projects in reinforcement learning, particularly hierarchical reinforcement
+        learning
+        and applications to compelling real-world problems. If these areas interest you, please get in touch once
+        dissertation supervisor selection
+        begins; I would be happy to discuss your ideas.
+    </p>
+    <p>
+        I would love to supervise all the brilliant students interested in these topics, but please bear in mind that
+        my workload varies each year and I may not have capacity for everyone.
+    </p>
+</section>
 
 {% comment %}
-Load students from `_data/past_students.yml` → students: [ ... ]
+Load students from `_data/project_students.yaml` → students: [ ... ]
 Guard against nils; group by year (descending); sort students by name within each year.
 {% endcomment %}
-{% assign ds = site.data.past_students %}
+{% assign ds = site.data.project_students %}
 {% assign items = ds.students | default: '' | split: '' %}
 {% if ds and ds.students %}
 {% assign items = ds.students %}

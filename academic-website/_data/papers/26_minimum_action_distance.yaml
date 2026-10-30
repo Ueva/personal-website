@@ -1,0 +1,18 @@
+title: Learning The Minimum Action Distance (ICML 2026)
+date: 2026-05-30
+description: We propose a novel method for learning the <strong>minimum action distance</strong> in reinforcement learning. Our approach uses quasimetrics to model asymmetric distances in directed environments, leading to more accurate estimates that improve performance on downstream tasks.
+paper: /assets/papers/2026_04_ICML_SteccanellaEvansSimsekJonsson.pdf
+code: https://github.com/lorenzosteccanella/MinimumActionDistance
+preprint: https://arxiv.org/abs/2506.09276
+reference: 'Steccanella, L., Evans, J.B., Şimşek, Ö., and Jonsson, A. (2026). "Learning the minimum action distance". Proceedings of the 43rd International Conference on Machine Learning, PMLR.'
+bibtex: |-
+  @inproceedings{steccanella2026mad,
+    title = {Learning the Minimum Action Distance},
+    author = {Steccanella, Lorenzo and Evans, Joshua B. and {\c{S}}im{\c{s}}ek, {\"O}zg{\"u}r and Jonsson, Anders},
+    booktitle = {Proceedings of the 43rd International Conference on Machine Learning},
+    year = {2026},
+    pages = {115677--115710},
+    volume = {306},
+    series = {Proceedings of Machine Learning Research},
+    publisher = {PMLR}
+  }

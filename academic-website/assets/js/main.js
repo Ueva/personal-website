@@ -7,6 +7,47 @@ function onReady(callback) {
 }
 
 onReady(() => {
+  let activeBibtexStatus;
+  let bibtexFadeTimer;
+  let bibtexClearTimer;
+
+  function clearBibtexFeedback() {
+    clearTimeout(bibtexFadeTimer);
+    clearTimeout(bibtexClearTimer);
+    if (activeBibtexStatus) {
+      activeBibtexStatus.textContent = '';
+      activeBibtexStatus.classList.remove('is-fading');
+      activeBibtexStatus = null;
+    }
+  }
+  document.querySelectorAll('[data-copy-bibtex]').forEach((button) => {
+    const container = button.closest('.bibtex-copy');
+    const source = container.querySelector('[data-bibtex-source]');
+    const status = container.querySelector('[data-bibtex-status]');
+
+    button.addEventListener('click', async () => {
+      clearBibtexFeedback();
+      button.disabled = true;
+      status.textContent = '';
+      try {
+        await navigator.clipboard.writeText(source.value);
+        source.hidden = true;
+        clearBibtexFeedback();
+        activeBibtexStatus = status;
+        status.textContent = 'Copied!';
+        bibtexFadeTimer = setTimeout(() => status.classList.add('is-fading'), 1500);
+        bibtexClearTimer = setTimeout(clearBibtexFeedback, 2000);
+      } catch (error) {
+        source.hidden = false;
+        source.focus();
+        source.select();
+        status.textContent = 'Could not copy automatically. Copy the selected citation below.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
+
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('#site-nav');
   const header = document.querySelector('.site-header');

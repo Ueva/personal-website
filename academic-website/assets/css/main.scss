@@ -405,6 +405,18 @@ button { text-shadow: none !important; transition: none !important; }
 .button a:hover,
 .button:hover { text-shadow: none !important; }
 
+/* Keep link and clipboard buttons consistent, including visited links. */
+.card-actions .button:not(.primary) { color: var(--link); }
+
+[data-bibtex-status] {
+  opacity: 1;
+  transition: opacity .5s ease;
+}
+[data-bibtex-status].is-fading { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-bibtex-status] { transition: none; }
+}
 /* Tables */
 table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
 th, td { border: 1px solid var(--border); padding: .5rem .6rem; text-align: left; }

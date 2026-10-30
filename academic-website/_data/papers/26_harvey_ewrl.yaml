@@ -1,0 +1,13 @@
+title: Graph-Based Skill Discovery in Continuous State Spaces via Temporal Distance Clustering
+date: 2026-10-03
+description: We present an approach for constructing abstract transition graphs by clustering states within a temporal distance embedding space. This approach enables the application of any graph-based skill discovery method to environments with continuous state spaces.
+workshop: /assets/papers/2026_09_EWRL_AylingSimsekEvans.pdf
+reference: 'Ayling, H., Şimşek, Ö., and Evans, J.B. (2026). "Graph-based skill discovery in continuous state spaces via temporal distance clustering". 19th European Workshop on Reinforcement Learning (EWRL 2026).'
+bibtex: |-
+  @inproceedings{ayling2026graph,
+    title = {Graph-Based Skill Discovery in Continuous State Spaces via Temporal Distance Clustering},
+    author = {Ayling, Harvey and {\c{S}}im{\c{s}}ek, {\"O}zg{\"u}r and Evans, Joshua B.},
+    booktitle = {19th European Workshop on Reinforcement Learning},
+    year = {2026},
+    series = {EWRL 2026}
+  }

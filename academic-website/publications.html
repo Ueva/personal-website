@@ -92,9 +92,7 @@ nav_title: Publications
                 {% if paper.code %}
                 <a class="button" href="{{ paper.code }}" target="_blank" rel="noopener">Code »</a>
                 {% endif %}
-                {% if paper.bibtex %}
-                <a class="button" href="{{ paper.bibtex }}" target="_blank" rel="noopener">BibTeX »</a>
-                {% endif %}
+                {% include bibtex-button.html paper=paper %}
             </div>
         </article>
         {% endif %}
@@ -132,7 +130,7 @@ nav_title: Publications
 
             <div class="card-actions">
                 {% if paper.workshop %}
-                <a class="button primary" href="{{ paper.workshop }}" target="_blank" rel="noopener">Workshop »</a>
+                <a class="button primary" href="{{ paper.workshop }}" target="_blank" rel="noopener">Paper »</a>
                 {% endif %}
                 {% if paper.supplement %}
                 <a class="button" href="{{ paper.supplement }}" target="_blank" rel="noopener">Appendices »</a>
@@ -143,9 +141,7 @@ nav_title: Publications
                 {% if paper.code %}
                 <a class="button" href="{{ paper.code }}" target="_blank" rel="noopener">Code »</a>
                 {% endif %}
-                {% if paper.bibtex %}
-                <a class="button" href="{{ paper.bibtex }}" target="_blank" rel="noopener">BibTeX »</a>
-                {% endif %}
+                {% include bibtex-button.html paper=paper %}
             </div>
         </article>
         {% endif %}
@@ -191,9 +187,7 @@ nav_title: Publications
                 {% if paper.code %}
                 <a class="button" href="{{ paper.code }}" target="_blank" rel="noopener">Code »</a>
                 {% endif %}
-                {% if paper.bibtex %}
-                <a class="button" href="{{ paper.bibtex }}" target="_blank" rel="noopener">BibTeX »</a>
-                {% endif %}
+                {% include bibtex-button.html paper=paper %}
             </div>
         </article>
         {% endif %}

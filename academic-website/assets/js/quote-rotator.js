@@ -11,12 +11,18 @@
   const interval = 15000;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let paused = reducedMotion.matches;
-  let index = 0;
+  let index = Math.floor(Math.random() * quotes.length);
   let timer;
   let progressAnimation;
 
   let remaining = interval;
   let startedAt = null;
+
+  function showQuote() {
+    // HTML is rendered once by Jekyll from trusted, locally maintained quote data.
+    text.innerHTML = quotes[index].html;
+    author.textContent = `\u2013 ${quotes[index].author}`;
+  }
 
   function stop() {
     clearTimeout(timer);
@@ -55,9 +61,7 @@
       progressAnimation?.cancel();
       progressAnimation = null;
       index = (index + 1 + Math.floor(Math.random() * (quotes.length - 1))) % quotes.length;
-      // HTML is rendered once by Jekyll from trusted, locally maintained quote data.
-      text.innerHTML = quotes[index].html;
-      author.textContent = `\u2013 ${quotes[index].author}`;
+      showQuote();
       update();
     }, remaining);
   }
@@ -73,5 +77,6 @@
     update();
   });
   document.addEventListener('visibilitychange', update);
+  showQuote();
   update();
 })();

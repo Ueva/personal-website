@@ -27,7 +27,7 @@ Before publishing, run the checks and inspect the affected pages on a phone-size
 - `_data/project_students.yaml`: a `students` list; each entry has `name`, `year` (academic year ending), `degree`, `thesis`, and optional `url`.
 - `_data/phd_students.yaml`: a `students` list; `name` and a quoted `start_date` are required. Optional: `qualification`, `end_date`, `topics` (a list of strings), `thesis_title`, `thesis_link`, `url`, and `role`. Omit or leave `end_date` empty for current students. An end date makes the student former, regardless of today's date. Current students sort by start date, former students by end date, oldest first. Current thesis titles are labelled Provisional. Dates use `YYYY-MM-DD`.
 - `_data/doctoral_supervision.yaml`: boolean `accepting_students`, open/closed messages, and a list of advertised opportunities (`title`, `url`).
-- `_data/quotes.yaml`: a non-empty list of `text`/`author` strings. Text supports emphasis and line breaks. The first quote is rendered without JavaScript; rotation can be paused and starts paused for reduced-motion users.
+- `_data/quotes.yaml`: a non-empty list of `text`/`author` strings. Text supports emphasis and line breaks. JavaScript selects a random initial quote on each page load; the first entry is the fallback without JavaScript. Rotation can be paused and starts paused for reduced-motion users.
 
 Plain titles, names, references, and metadata are escaped in templates. Paper descriptions and news text intentionally support trusted HTML. Do not put untrusted user submissions in these fields. Quotes are trusted local content, rendered once with Jekyll Markdown, including emphasis and line breaks. The browser reuses this HTML; it does not implement a second formatter.
 

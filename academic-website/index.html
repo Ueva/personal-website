@@ -34,10 +34,10 @@ nav_title: Home
 
         <picture class="pull-figure">
             <source type="image/webp"
-                srcset="{{ '/assets/images/profile_pic-400.webp' | relative_url }} 400w, {{ '/assets/images/profile_pic-800.webp' | relative_url }} 800w"
-                sizes="(max-width: 600px) 70vw, 340px">
-            <img src="{{ site.image | relative_url }}" alt="Profile picture of {{ site.author.name | escape }}"
-                width="1291" height="1291" loading="lazy" decoding="async">
+                srcset="{% include asset-url.html path='/assets/images/profile_pic-400.webp' %} 400w, {% include asset-url.html path='/assets/images/profile_pic-480.webp' %} 480w, {% include asset-url.html path='/assets/images/profile_pic-600.webp' %} 600w, {% include asset-url.html path='/assets/images/profile_pic-800.webp' %} 800w"
+                sizes="(max-width: 900px) min(calc(70vw - 3.5rem), 380px), 340px">
+            <img src="{% include asset-url.html path=site.image %}" alt="Profile picture of {{ site.author.name | escape }}"
+                width="1291" height="1291" fetchpriority="high" decoding="async">
         </picture>
 
 
@@ -70,20 +70,20 @@ nav_title: Home
         </p>
         <ul class="mt-0 intro-list">
             <li>Reinforcement Learning (Undergraduate:
-                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM32032.html" target="_blank">CM32032</a>,
-                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM52048.html" target="_blank">CM52048</a>)
+                <a href="https://www.bath.ac.uk/catalogues/2026-2027/cm/CM32032.html" target="_blank">CM32032</a>,
+                <a href="https://www.bath.ac.uk/catalogues/2026-2027/cm/CM52048.html" target="_blank">CM52048</a>)
             </li>
             <li>Reinforcement Learning 1 (Postgraduate:
-                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM52074.html" target="_blank">CM52074</a>)
+                <a href="https://www.bath.ac.uk/catalogues/2026-2027/cm/CM52074.html" target="_blank">CM52074</a>)
             </li>
             <li>Reinforcement Learning 2 (Postgraduate:
-                <a href="https://www.bath.ac.uk/catalogues/2025-2026/cm/CM52075.html" target="_blank">CM52075</a>)
+                <a href="https://www.bath.ac.uk/catalogues/2026-2027/cm/CM52075.html" target="_blank">CM52075</a>)
             </li>
         </ul>
         <p>
             I supervise <a href="{{ '/supervision.html' | relative_url }}">BSc, MComp, and MSc dissertation projects</a>
             alongside <a href="{{ '/phds.html' | relative_url }}">doctoral research</a>.
-            My supervision pages introduce my students and their work, and includes information for those interested in
+            My supervision pages introduce my students and their work, and include information for those interested in
             working with me.
         </p>
 

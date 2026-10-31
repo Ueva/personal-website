@@ -10,6 +10,7 @@ Install Ruby 3.3, Bundler, and Node.js (Node is used only by the syntax checks).
 - `./build.ps1`: builds production output in `_site` and runs all automated checks. Publish only after this command succeeds.
 - `./check.ps1`: validates content and builds into a temporary directory. Does not change the site output.
 - `./check.ps1 -PreviewUrl http://localhost:4000`: also checks the actual content served by the running preview against current sources.
+- `node scripts/check-browser.cjs`: after building, checks cold page startup with a throttled mobile connection/CPU, layout shifts, portrait selection, and core interactions. Requires Node.js 22+ and Edge/Chrome/Chromium; set `BROWSER_BIN` to its executable path if automatic detection fails. No npm dependencies. Analytics requests are blocked during these tests.
 
 The PowerShell scripts work from any working directory. On other systems, use `bundle exec jekyll serve --config _config.yaml,_config_dev.yaml`, `bundle exec ruby scripts/check.rb --build`, and `bundle exec ruby scripts/check.rb` from this directory. Add `--preview http://localhost:4000` to check a running preview.
 
@@ -37,9 +38,9 @@ Keep local file URLs root-relative (for example `/assets/papers/example.pdf`). T
 
 `assets/css/main.scss` loads the partials in `_sass`: self-hosted STIX2 fonts, theme tokens, base elements, layout, and components. Reuse `.card`, `.button`, and `.card-actions`. Keep layout rules in Sass rather than inline styles; add components only when existing ones do not fit.
 
-Navigation is a normal disclosure on narrow screens, not a modal overlay. Without JavaScript the links remain visible. Theme state lives in memory, with optional localStorage persistence; `theme.js` runs before CSS to avoid an incorrect initial theme. Clipboard copying has a native details/textarea fallback, including without JavaScript.
+Navigation is a normal disclosure on narrow screens, not a modal overlay. Without JavaScript the links remain visible. `_includes/theme-init.js` runs inline before CSS to apply the saved theme. `_includes/header-controls.js` runs inline immediately after the header to initialise navigation and theme controls before deferred scripts load, avoiding an expanded-menu flash. Keep these scripts small; they are included directly, not fetched separately. Theme state lives in memory, with optional localStorage persistence. Clipboard copying has a native details/textarea fallback, including without JavaScript.
 
-All local CSS and JavaScript URLs go through `_includes/asset-url.html`, which adds a build version. Deploy the complete `_site` directory together. The version changes with every build to avoid stale assets; do not remove it from individual scripts.
+External local CSS/JavaScript and homepage portrait URLs go through `_includes/asset-url.html`, which adds a build version. Deploy the complete `_site` directory together. The version changes with every build to avoid stale assets. See [deployment and caching](docs/deployment.md) for the Cloudflare rule to apply alongside deployment to the DigitalOcean droplet.
 
 The build uses only feed, sitemap, and last-modified Jekyll plugins. BibTeX and HTML parsing are validation dependencies, not page-rendering plugins. Checks compare rendered content with its data, require the manually edited featured card's title, summary, and link, and test that missing content/assets are rejected. Static assets are compared byte-for-byte with their sources. Keep `Gemfile.lock` committed. Analytics is configured in `_config_prod.yaml` and only rendered with `JEKYLL_ENV=production`.
 
@@ -47,7 +48,7 @@ The build uses only feed, sitemap, and last-modified Jekyll plugins. BibTeX and 
 
 STIX Two Text (variable weights 400?700, normal and italic) and STIX Two Math are served locally from `assets/fonts`, with their SIL Open Font Licences. The font files are the unmodified WOFF2 distributions from Google Fonts, v18 Text / v12 Math. Unicode subsets load only when used. `_sass/_fonts.scss` declares them; the primary Latin text face is preloaded in the shared head. Preserve the licences when updating fonts.
 
-The original `assets/images/profile_pic.png` is retained for metadata and as a fallback. The homepage uses responsive 400px/800px WebP variants, native lazy loading, asynchronous decoding, and reserved square dimensions. When replacing the portrait, run `python scripts/optimise-portrait.py` after installing Pillow (`python -m pip install Pillow`). This is an optional asset-maintenance command; normal builds do not require Python or Pillow. If the original aspect ratio changes, also update the image dimensions and reserved aspect ratio in the homepage/layout.
+The original `assets/images/profile_pic.png` is retained for metadata and as a fallback. The homepage uses responsive 400px/480px/600px/800px WebP variants, high-priority loading, asynchronous decoding, and reserved square dimensions. The portrait is visible in the initial viewport on typical phones, so do not lazy-load it. Its mobile `sizes` hint matches the width in `_sass/_layout.scss`; update both together if that width changes. When replacing the portrait, run `python scripts/optimise-portrait.py` after installing Pillow (`python -m pip install Pillow`). This is an optional asset-maintenance command; normal builds do not require Python or Pillow. If the original aspect ratio changes, also update the image dimensions and reserved aspect ratio in the homepage/layout.
 
 The quote control is an icon with accessible Pause Quotes / Resume Quotes labels. Pausing preserves the remaining time and progress; returning from a hidden browser tab does the same.
 

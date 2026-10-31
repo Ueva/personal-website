@@ -34,7 +34,7 @@ default: site.description | strip_html | normalize_whitespace | truncate: 160 -%
     href="{{ '/feed.xml' | absolute_url }}">
 
 <!-- Main stylesheet -->
-<script src="{% include asset-url.html path='/assets/js/theme.js' %}"></script>
+<script>{% include theme-init.js %}</script>
 <link rel="stylesheet" href="{% include asset-url.html path='/assets/css/main.css' %}">
 
 <!-- Theme color per scheme (nice address bar tint on mobile) -->

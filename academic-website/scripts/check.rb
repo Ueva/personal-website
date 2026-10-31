@@ -183,6 +183,7 @@ def validate_output(destination)
     if document.at_css('main')
       check(document.errors.empty?, "#{path}: invalid HTML: #{document.errors.join('; ')}")
       check(document.css('h1').size == 1 && !document.at_css('h1').text.strip.empty?, "#{path}: expected one non-empty page heading")
+      check(document.css('script[src]:not([defer]):not([async])').empty?, "#{path}: external scripts must not block rendering")
     end
     document.css('script[type="application/ld+json"], script[type="application/json"]').each { |script| JSON.parse(script.content) }
     document.css('[href], [src]').each do |node|
@@ -411,7 +412,7 @@ check(ARGV.empty?, "Unexpected arguments: #{ARGV.join(' ')}")
 
 Dir.chdir(ROOT) do
   validate_data
-  Dir['assets/js/*.js'].each { |path| check(system('node', '--check', path), "JavaScript syntax error in #{path} (Node.js is required)") }
+  Dir['assets/js/*.js', '_includes/*.js', 'scripts/*.cjs'].each { |path| check(system('node', '--check', path), "JavaScript syntax error in #{path} (Node.js is required)") }
   ENV['JEKYLL_ENV'] = 'production'
   Dir.mktmpdir('website-check-') do |temp|
     destination = options[:build] ? File.join(ROOT, '_site') : File.join(temp, 'site')
@@ -427,7 +428,7 @@ Dir.chdir(ROOT) do
     site.static_files.each do |file|
       check(Digest::SHA256.file(file.path) == Digest::SHA256.file(file.destination(destination)), "Static asset differs from source: #{file.relative_path}")
     end
-    %w[_site_dev _drafts scripts README.md build.ps1 check.ps1 serve.ps1 Gemfile Gemfile.lock].each do |name|
+    %w[_site_dev _drafts scripts docs README.md build.ps1 check.ps1 serve.ps1 Gemfile Gemfile.lock].each do |name|
       check(!File.exist?(File.join(destination, name)), "Production output contains development file: #{name}")
     end
     validate_missing_asset_detection(File.join(temp, 'asset-fixture'))

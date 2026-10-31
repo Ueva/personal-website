@@ -48,4 +48,5 @@ exclude:
   - build.ps1
   - check.ps1
   - scripts
+  - docs
   - README.md

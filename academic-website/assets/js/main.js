@@ -1,46 +1,5 @@
 // This script is deferred: the document is ready when it runs.
 (() => {
-  function initNavigation() {
-    const header = document.querySelector('.site-header');
-    const button = document.querySelector('.nav-toggle');
-    const nav = document.getElementById('site-nav');
-    if (!header || !button || !nav) return;
-
-    function closeMenu(restoreFocus = false) {
-      if ((restoreFocus || nav.contains(document.activeElement)) && getComputedStyle(button).display !== 'none') {
-        button.focus();
-      }
-      nav.classList.remove('open');
-      button.setAttribute('aria-expanded', 'false');
-    }
-    button.addEventListener('click', () => {
-      const open = !nav.classList.contains('open');
-      nav.classList.toggle('open', open);
-      button.setAttribute('aria-expanded', String(open));
-    });
-    header.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && nav.classList.contains('open')) {
-        closeMenu(true);
-        event.preventDefault();
-      }
-    });
-    nav.addEventListener('click', (event) => {
-      if (event.target.closest('a')) closeMenu();
-    });
-    header.addEventListener('focusout', (event) => {
-      if (!header.contains(event.relatedTarget)) closeMenu();
-    });
-    document.addEventListener('click', (event) => {
-      if (!header.contains(event.target)) closeMenu();
-    });
-    window.addEventListener('resize', () => {
-      // CSS owns the breakpoint; avoid a second hard-coded copy in JavaScript.
-      if (getComputedStyle(button).display === 'none') closeMenu();
-      else if (!nav.classList.contains('open') && nav.contains(document.activeElement)) button.focus();
-    });
-    header.classList.add('nav-enhanced');
-  }
-
   function initBibtexCopy() {
     let active;
     let fadeTimer;
@@ -95,6 +54,5 @@
     });
   }
 
-  initNavigation();
   initBibtexCopy();
 })();
